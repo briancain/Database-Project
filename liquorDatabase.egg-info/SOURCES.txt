@@ -3,6 +3,7 @@ README.txt
 setup.cfg
 setup.py
 ldb/__init__.py
+ldb/websetup.py
 ldb/config/__init__.py
 ldb/config/app_cfg.py
 ldb/config/environment.py
@@ -19,6 +20,7 @@ ldb/lib/base.py
 ldb/lib/helpers.py
 ldb/model/__init__.py
 ldb/model/auth.py
+ldb/model/data.py
 ldb/public/favicon.ico
 ldb/public/css/style.css
 ldb/public/images/contentbg.png

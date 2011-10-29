@@ -60,3 +60,4 @@ def init_model(engine):
 
 # Import your model modules here.
 from ldb.model.auth import User, Group, Permission
+from ldb.model.data import *
