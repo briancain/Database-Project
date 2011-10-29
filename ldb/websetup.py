@@ -18,9 +18,12 @@ def setup_app(command, conf, vars):
   # Create the initial data
   print "Creating initial data"
 
-  beer = model.Beer("1", "Halcyon", "Lager", "Wheat", "Gold", 5)
+  halc = model.Beer(1, "Halcyon", "Lager", "Wheat", "Gold", 5, 1)
+  tallg = model.Manufacturer(1, "Tallgrass Brewing Co.", "8845 Quail Lane Manhattan, KS 66502", 
+                                "http://tallgrassbeer.com/")
 
-  model.DBSession.add(beer)
+  model.DBSession.add(halc)
+  model.DBSession.add(tallg)
 
   transaction.commit()
   print "Successfully setup"
