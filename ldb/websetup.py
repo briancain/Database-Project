@@ -18,11 +18,13 @@ def setup_app(command, conf, vars):
   # Create the initial data
   print "Creating initial data"
 
+  drinkh = model.Drink(1, "Halcyon", 5, 1, 1)
   halc = model.Beer(1, "Lager", "Wheat", "About", "Gold")
   tallg = model.Manufacturer(1, "Tallgrass Brewing Co.", "8845 Quail Lane Manhattan, KS 66502", 
                                 "911", "http://tallgrassbeer.com/", "Hurray Beer", 1)
   ks = model.Region(1, "Kansas", "It's flat")
 
+  model.DBSession.add(drinkh)
   model.DBSession.add(halc)
   model.DBSession.add(tallg)
   model.DBSession.add(ks)

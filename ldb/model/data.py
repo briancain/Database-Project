@@ -4,7 +4,28 @@ from sqlalchemy.types import Integer, Unicode, Boolean
 
 from ldb.model import DeclarativeBase, metadata, DBSession
 
-__all__ = [ 'Beer', 'Manufacturer', 'Region' ]
+__all__ = [ 'Beer', 'Manufacturer', 'Region', 'Drink' ]
+
+class Drink(DeclarativeBase):
+  __tablename__ = 'Drink'
+
+  id = Column(Integer, primary_key=True)
+  name = Column(Unicode, nullable=False)
+  abv = Column(Integer, nullable=True)
+
+  manu_id = Column(Integer, ForeignKey('Manufacturer.id'), nullable=True)
+  man = relation('Manufacturer', foreign_keys=manu_id)
+
+  catB_id = Column(Integer, ForeignKey('Beer.id'), nullable=True)
+  catB = relation('Beer', foreign_keys=catB_id)
+
+  def __init__(self, id, name, abv, manu_id, catB_id):
+    self.id = id
+    self.name = name
+    self.abv = abv
+    
+    self.manu_id = manu_id
+    self.catB_id = catB_id
 
 class Beer(DeclarativeBase):
   __tablename__ = 'Beer'
