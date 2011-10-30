@@ -4,31 +4,23 @@ from sqlalchemy.types import Integer, Unicode, Boolean
 
 from ldb.model import DeclarativeBase, metadata, DBSession
 
-__all__ = [ 'Beer', 'Manufacturer' ]
+__all__ = [ 'Beer', 'Manufacturer', 'Region' ]
 
 class Beer(DeclarativeBase):
-  __tablename__ = 'beer'
+  __tablename__ = 'Beer'
   
   id = Column(Integer, primary_key=True)
-  name = Column(Unicode, nullable=False)
   category = Column(Unicode, nullable=True)
   style = Column(Unicode, nullable=True)
+  about = Column(Unicode, nullable=True)
   color = Column(Unicode, nullable=True)
-  abv = Column(Integer, nullable=True)
 
-  manf_id = Column(Integer,ForeignKey('Manufacturer.id'), nullable=True)
-  manf = relation('Manufacturer',foreign_keys=manf_id )
-  reviewed = Column(Boolean, nullable=False, default=False )
-
-  def __init__(self, id, name, category, style, color, abv, manf_id):
+  def __init__(self, id, category, style, about, color):
     self.id = id
-    self.name = name
     self.category = category
     self.style = style
+    self.about = about
     self.color = color
-    self.abv = abv
-
-    self.manf_id = manf_id
 
 class Manufacturer(DeclarativeBase):
   __tablename__ = 'Manufacturer'
@@ -36,10 +28,31 @@ class Manufacturer(DeclarativeBase):
   id = Column(Integer,primary_key=True)
   name = Column(Unicode,nullable=False,unique=True)
   address = Column(Unicode, nullable=True)
-  web = Column(Unicode, nullable=False)
+  web = Column(Unicode, nullable=True)
+  phone = Column(Integer, nullable = True)
+  about = Column(Unicode, nullable=True)
 
-  def __init__(self, id, name, address, web):
+  reg_id = Column(Integer, ForeignKey('Region.id'), nullable=True)
+  reg = relation('Region', foreign_keys=reg_id)
+
+  def __init__(self, id, name, address, phone, web, about, reg_id):
     self.id = id
     self.name = name
     self.address = address
     self.web = web
+    self.phone = phone
+    self.about = about
+
+    self.reg_id = reg_id
+
+class Region(DeclarativeBase):
+  __tablename__ = 'Region'
+
+  id = Column(Integer, primary_key=True)
+  state = Column(Unicode, nullable = False)
+  about = Column(Unicode, nullable =  True)
+
+  def __init__(self, id, state, about):
+    self.id = id
+    self.state = state
+    self.about = about
