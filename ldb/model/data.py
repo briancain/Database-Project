@@ -101,6 +101,7 @@ class Wine(DeclarativeBase):
     self.id = id
     self.category = category
     self.about = about
+    self.style = style
     self.color = color
     self.grapes = grapes
 
