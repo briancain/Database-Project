@@ -27,7 +27,7 @@ def setup_app(command, conf, vars):
   # (id, category, style, about, color)
   halc = model.Beer(1, "Lager", "Wheat", "About", "Gold")
 
-  # (id, category, style, about, color, ingrediants)
+  # (id, category, style, about, color, ingredients)
   kr = model.Liquor(1, "Rum", "Spiced Rum", "About", "Black", "Sugar")
 
   # (id, category, style, about, color, grapes)
