@@ -8,7 +8,7 @@ from ldb.config.environment import load_environment
 log = logging.getLogger(__name__)
 
 def setup_app(command, conf, vars):
-  """Place any commands to setup Movies here"""
+  """Place any commands to setup the Database here"""
   load_environment(conf.global_conf, conf.local_conf)
   # Load the models
   from ldb import model
