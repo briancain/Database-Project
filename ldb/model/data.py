@@ -4,7 +4,7 @@ from sqlalchemy.types import Integer, Unicode, Boolean
 
 from ldb.model import DeclarativeBase, metadata, DBSession
 
-__all__ = [ 'Beer', 'Manufacturer', 'Region', 'Drink', 'Liquor' ]
+__all__ = [ 'Beer', 'Manufacturer', 'Region', 'Drink', 'Liquor', 'Wine', 'Food' ]
 
 class Drink(DeclarativeBase):
   __tablename__ = 'Drink'
@@ -22,7 +22,10 @@ class Drink(DeclarativeBase):
   catL_id = Column(Integer, ForeignKey('Liquor.id'), nullable=True)
   catL = relation('Liquor', foreign_keys=catL_id)
 
-  def __init__(self, id, name, abv, manu_id, catB_id, catL_id):
+  catW_id = Column(Integer, ForeignKey('Wine.id'), nullable=True)
+  catW = relation('Wine', foreign_keys=catW_id)
+
+  def __init__(self, id, name, abv, manu_id, catB_id, catL_id, catW_id):
     self.id = id
     self.name = name
     self.abv = abv
@@ -30,6 +33,25 @@ class Drink(DeclarativeBase):
     self.manu_id = manu_id
     self.catB_id = catB_id
     self.catL_id = catL_id
+    self.catW_id = catW_id
+
+class Food(DeclarativeBase):
+  __tablename__ = 'Food'
+
+  id = Column(Integer, primary_key=True)
+  name = Column(Unicode, nullable=False)
+
+  catB_id = Column(Integer, ForeignKey('Beer.id'), nullable=True)
+  catB = relation('Beer', foreign_keys=catB_id)
+
+  catW_id = Column(Integer, ForeignKey('Wine.id'), nullable=True)
+  catW = relation('Wine', foreign_keys=catW_id)
+
+  def __init__(self, id, catB_id, catW_id, name):
+    self.id = id
+    self.catB_id = catB_id
+    self.catW_id = catW_id
+    self.name = name
 
 class Beer(DeclarativeBase):
   __tablename__ = 'Beer'
@@ -64,6 +86,23 @@ class Liquor(DeclarativeBase):
     self.about = about
     self.color = color
     self.ingred = ingred
+
+class Wine(DeclarativeBase):
+  __tablename__ = 'Wine'
+
+  id = Column(Integer, primary_key=True)
+  category = Column(Unicode, nullable=True)
+  style = Column(Unicode, nullable=True)
+  about = Column(Unicode, nullable=True)
+  color = Column(Unicode, nullable=True)
+  grapes = Column(Unicode, nullable=True)
+
+  def __init__(self, id, category, style, about, color, grapes):
+    self.id = id
+    self.category = category
+    self.about = about
+    self.color = color
+    self.grapes = grapes
 
 class Manufacturer(DeclarativeBase):
   __tablename__ = 'Manufacturer'
