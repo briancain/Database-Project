@@ -18,16 +18,22 @@ def setup_app(command, conf, vars):
   # Create the initial data
   print "Creating initial data"
 
+  # (id, name, abv, manu_id, catbeer ID, catLiquor ID, catWine ID)
+  # -1 if null....for now
   drinkb = model.Drink(1, "Halcyon", 5, 1, 1, -1, -1)
   drinkl = model.Drink(2, "The Kracken Black Spiced Rum", 40, 2, -1, 1, -1)
   drinkw = model.Drink(3, "Relax Riesling", 9.5, 3, -1, -1, 1)
 
+  # (id, category, style, about, color)
   halc = model.Beer(1, "Lager", "Wheat", "About", "Gold")
 
+  # (id, category, style, about, color, ingrediants)
   kr = model.Liquor(1, "Rum", "Spiced Rum", "About", "Black", "Sugar")
 
+  # (id, category, style, about, color, grapes)
   relw = model.Wine(1, "White", "Riesling", "About Coming Soon", "Yellow", "Reisling")
 
+  # (id, name, address, phone, web, about, region_id)
   tallg = model.Manufacturer(1, "Tallgrass Brewing Co.", "8845 Quail Lane Manhattan, KS 66502", 
                                 "911", "http://tallgrassbeer.com/", "Hurray Beer", 1)
   krack = model.Manufacturer(2, "Kracken Rum Co.", "333 Washington St. Jersey City, NJ 07302",
@@ -35,9 +41,12 @@ def setup_app(command, conf, vars):
 
   relax = model.Manufacturer(3, "Relax", "Address goes here", "911", "http://web.com", "Wine About", 2)
 
+  # (id, state, about)
   ks = model.Region(1, "Kansas", "It's flat")
   nj = model.Region(2, "East", "East cost")
 
+  # (id, catbeer id, catwine id, name)
+  # -1 if null...for now
   nomnom = model.Food(1, -1, 1, "Pasta w/ White Sauce")
   nomnom2 = model.Food(2, 1, -1, "Red Meat")
 
