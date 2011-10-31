@@ -4,7 +4,7 @@ from sqlalchemy.types import Integer, Unicode, Boolean
 
 from ldb.model import DeclarativeBase, metadata, DBSession
 
-__all__ = [ 'Beer', 'Manufacturer', 'Region', 'Drink' ]
+__all__ = [ 'Beer', 'Manufacturer', 'Region', 'Drink', 'Liquor' ]
 
 class Drink(DeclarativeBase):
   __tablename__ = 'Drink'
@@ -19,13 +19,17 @@ class Drink(DeclarativeBase):
   catB_id = Column(Integer, ForeignKey('Beer.id'), nullable=True)
   catB = relation('Beer', foreign_keys=catB_id)
 
-  def __init__(self, id, name, abv, manu_id, catB_id):
+  catL_id = Column(Integer, ForeignKey('Liquor.id'), nullable=True)
+  catL = relation('Liquor', foreign_keys=catL_id)
+
+  def __init__(self, id, name, abv, manu_id, catB_id, catL_id):
     self.id = id
     self.name = name
     self.abv = abv
     
     self.manu_id = manu_id
     self.catB_id = catB_id
+    self.catL_id = catL_id
 
 class Beer(DeclarativeBase):
   __tablename__ = 'Beer'
@@ -42,6 +46,24 @@ class Beer(DeclarativeBase):
     self.style = style
     self.about = about
     self.color = color
+
+class Liquor(DeclarativeBase):
+  __tablename__ = 'Liquor'
+
+  id = Column(Integer, primary_key=True)
+  category = Column(Unicode, nullable=True)
+  style = Column(Unicode, nullable=True)
+  about = Column(Unicode, nullable=True)
+  color = Column(Unicode, nullable=True)
+  ingred = Column(Unicode, nullable=True)
+
+  def __init__(self, id, category, style, about, color, ingred):
+    self.id = id
+    self.category = category
+    self.style = style
+    self.about = about
+    self.color = color
+    self.ingred = ingred
 
 class Manufacturer(DeclarativeBase):
   __tablename__ = 'Manufacturer'
