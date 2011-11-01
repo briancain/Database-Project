@@ -13,6 +13,8 @@ class Drink(DeclarativeBase):
   name = Column(Unicode, nullable=False)
   abv = Column(Integer, nullable=True)
 
+  CheckConstraint('abv > 0', 'abv < 100')
+
   manu_id = Column(Integer, ForeignKey('Manufacturer.id'), nullable=True)
   man = relation('Manufacturer', foreign_keys=manu_id)
 
