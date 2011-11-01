@@ -15,6 +15,8 @@ class Drink(DeclarativeBase):
 
   CheckConstraint('abv > 0', 'abv < 100')
 
+  CheckConstraint('(catB_id > 1 AND catL_id < 0 AND catW_id < 0) OR (catB_id < 0 AND catL_id > 1 AND catW_id < 0) OR (catB_id < 0 AND catL_id < 0 AND catW_id > 1)')
+
   manu_id = Column(Integer, ForeignKey('Manufacturer.id'), nullable=True)
   man = relation('Manufacturer', foreign_keys=manu_id)
 
