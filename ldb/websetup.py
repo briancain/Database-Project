@@ -129,6 +129,12 @@ def setup_app(command, conf, vars):
   model.DBSession.add(Stout)
   model.DBSession.add(AmericanBrownAle)
 
+# Check both constraints
+
+  #error1 = model.Drink(16, "Fail Drink", 200, 1, 10, 10, 10)
+
+  #model.DBSession.add(error1)
+
 #
 # DRINKS
 #

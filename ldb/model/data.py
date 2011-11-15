@@ -8,14 +8,11 @@ __all__ = [ 'Beer', 'Manufacturer', 'Region', 'Drink', 'Liquor', 'Wine', 'Food' 
 
 class Drink(DeclarativeBase):
   __tablename__ = 'Drink'
+  __table_args__ = (CheckConstraint('abv > 0', 'abv < 100'), CheckConstraint('(catB_id > 0 AND catL_id < 0 AND catW_id < 0) OR (catB_id < 0 AND catL_id > 0 AND catW_id < 0) OR (catB_id < 0 AND catL_id < 0 AND catW_id > 0)'))
 
   id = Column(Integer, primary_key=True)
   name = Column(Unicode, nullable=False)
   abv = Column(Integer, nullable=True)
-
-  CheckConstraint('abv > 0', 'abv < 100')
-
-  CheckConstraint('(catB_id > 1 AND catL_id < 0 AND catW_id < 0) OR (catB_id < 0 AND catL_id > 1 AND catW_id < 0) OR (catB_id < 0 AND catL_id < 0 AND catW_id > 1)')
 
   manu_id = Column(Integer, ForeignKey('Manufacturer.id'), nullable=True)
   man = relation('Manufacturer', foreign_keys=manu_id)
