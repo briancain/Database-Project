@@ -7,13 +7,14 @@ from catwalk.tg2 import Catwalk
 from repoze.what import predicates
 
 from ldb.lib.base import BaseController
-from ldb.model import DBSession, metadata
+from ldb.model import DBSession, metadata, Beer
 from ldb.controllers.error import ErrorController
 from ldb import model
 from ldb.controllers.secure import SecureController
 
-__all__ = ['RootController']
+from ldb.model.data import Beer
 
+__all__ = ['RootController']
 
 class RootController(BaseController):
     """
@@ -39,6 +40,11 @@ class RootController(BaseController):
     def index(self):
         """Handle the front-page."""
         return dict(page='index')
+
+    @expose('ldb.templates.page')
+    def page(self):
+        page = DBSession.query(Beer).order_by("id").all()
+        return dict(beerpage=page)
 
     @expose('ldb.templates.about')
     def about(self):

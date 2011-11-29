@@ -3,6 +3,7 @@ README.txt
 setup.cfg
 setup.py
 ldb/__init__.py
+ldb/table.py
 ldb/websetup.py
 ldb/config/__init__.py
 ldb/config/app_cfg.py
@@ -44,6 +45,7 @@ ldb/public/images/strype2.png
 ldb/public/images/under_the_hood_blue.png
 ldb/public/images/warning.png
 ldb/templates/__init__.py
+ldb/templates/__init__.pyc
 ldb/templates/about.html
 ldb/templates/authentication.html
 ldb/templates/debug.html
@@ -54,6 +56,7 @@ ldb/templates/index.html
 ldb/templates/login.html
 ldb/templates/master.html
 ldb/templates/sidebars.html
+ldb/templates/sproxdemo.html
 ldb/tests/__init__.py
 ldb/tests/functional/__init__.py
 ldb/tests/functional/test_authentication.py

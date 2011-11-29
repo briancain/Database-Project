@@ -1,6 +1,7 @@
 from sqlalchemy import *
+from sqlalchemy import Column
 from sqlalchemy.orm import mapper, relation, backref
-from sqlalchemy.types import Integer, Unicode, Boolean
+from sqlalchemy.types import Integer, Unicode, Boolean, Text
 
 from ldb.model import DeclarativeBase, metadata, DBSession
 
