@@ -1,16 +1,21 @@
 # -*- coding: utf-8 -*-
 """Main Controller"""
 
-from tg import expose, flash, require, url, request, redirect
+from tg import expose, flash, require, url, request, redirect, validate
+from tw.forms.validators import Int, NotEmpty, DateConverter
 from pylons.i18n import ugettext as _, lazy_ugettext as l_
 from catwalk.tg2 import Catwalk
 from repoze.what import predicates
+import pylons
 
 from ldb.lib.base import BaseController
-from ldb.model import DBSession, metadata, Beer
+from ldb.model import *
 from ldb.controllers.error import ErrorController
 from ldb import model
 from ldb.controllers.secure import SecureController
+from tw.jquery import FlexiGrid
+from tw.api import js_callback
+
 
 from ldb.model.data import Beer
 
@@ -50,6 +55,11 @@ class RootController(BaseController):
     def about(self):
         """Handle the 'about' page."""
         return dict(page='about')
+
+    # @expose('ldb.templates.derp')
+    #def derp(self):
+    #   """Handle the 'derp' page."""
+    #  return dict(page='derp')
 
     @expose('ldb.templates.authentication')
     def auth(self):
@@ -99,3 +109,38 @@ class RootController(BaseController):
         """
         flash(_('We hope to see you soon!'))
         redirect(came_from)
+
+    @expose('ldb.templates.derp')
+    def derp(self):
+        colModel = [
+            {'display':'ID', 'name':'id', 'width':20, 'align':'center'},
+            {'display':'Category', 'name':'title', 'width':80, 'align':'left'},
+            {'display':'Style', 'name':'description', 'width':100, 'align':'left'},
+            {'display':'About', 'name':'year', 'width':40, 'align':'center'},
+            {'display':'Color', 'name':'genera', 'width':40, 'align':'center'}
+        ]
+       
+        grid = FlexiGrid(id='flex', fetchURL='fetch', title='Beers',
+            colModel=colModel, useRp=True, rp=10,
+            sortname='id', sortorder='asc', usepager=True,
+            width=600,
+            height=200
+        )
+        pylons.tmpl_context.grid = grid
+        return dict(page = 'derp')
+
+    @expose('json')
+    #@validate(validators={"page":validators.Int(), "rp":validators.Int()})
+    def fetch(self, page=1, rp=25, sortname='id', sortorder='asc', qtype=None, query=None):
+        offset = (page-1) * rp
+        if (query):
+            #d = {qtype:query}
+            beers = DBSession.query(Beer)
+        else:
+            beers = DBSession.query(Beer)
+        total = beers.count()
+        column = getattr(Beer.c, sortname)
+        #beers = beers.order_by(getattr(column,sortorder)()).offset(offset).limit(rp)
+        rows = [{'id'  : beer.id,
+                 'cell': [beer.id, beer.category, beer.style, beer.about, beer.color]} for beer in beers]
+        return dict(page=page, total=total, rows=rows)
