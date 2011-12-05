@@ -36,6 +36,22 @@ def setup_app(command, conf, vars):
 
   FootHillsBrewing = model.Manufacturer(7, "Foothills Brewing Company", "638 W. 4th Street Winston-Salem, North Carolina United States", "(336) 777-3348", "http://www.foothillsbrewing.com/", "A small brewing company that produces a wide variety of beer", 7)
 
+  MccormickDistillingCo = model.Manufacturer(8,"McCormick Distilling Co.", "1 Mc Cormick Ln, Weston, MO 66502", "http://www.mccormickdistilling.com/","(816) 640-2276", "McCormick Distilling, located in historic Weston, Missouri, is the oldest continuously operating distillery in the U.S.", 2)
+
+  HobNobWineCo = model.Manufacturer(9,"HobNob Wine Company", "709 Westchester Ave., Suite 300, White Plains, NY 10604", "http://www.hobnobwines.com/","(914) 251-9463", "HobNob Wine Company offers fine French wines at California prices.", 4)
+
+  WJDeutschSonsLtd = model.Manufacturer(10,"W.J. Deutsch & Sons Ltd.", "709 Westchester Ave., Suite 300, White Plains, NY 10604", "http://www.wjdeutsch.com/","(914) 251-9463", "W.J.Deutsch & Sons builds brands that offer approachable wine experiences which contribute to a premium lifestyle for the mainstream and wine enthusiast consumer.", 4)
+
+  TheWineGroupInc = model.Manufacturer(11,"The Wine Group, Inc.", "315 Montgomery St., San Francisco, CA 94104", "http://www.thewinegroup.org/","(415) 986-8700", "The Wine Group, known for its Franzia wine in a box, the company was founded in 1981.", 6)
+
+  BacardiUsaInc = model.Manufacturer(12,"Bacardi USA, Inc.", "2701 Le Jeune Rd., Coral Gables, FL 33134", "http://www.Barcardi.com/","(305) 573-8511", "Bacardi is a family-controlled spirits company, best known as a producer of rums.", 8)
+
+  SchmittSohneInc = model.Manufacturer(13,"Schmitt Sohne, Inc.", "1111 Benfield Blvd., Suite 112, Millersville, MD 21108", "http://www.schmitt-soehne.com/","(410) 729-4083", "Schmitt Sohne is the leading importer of German Rieslings.", 9)
+
+  ChateauMontelena = model.Manufacturer(14,"Chateau Montelena Winery", "1429 Tubbs Lane, Calistoga, CA 94515", "http://www.montelena.com/","(707) 942-5105", "Chateau Montelena is a Napa Valley winery, most famous for winning the white wine section of the historic Judgement of Paris wine competition.", 6)
+
+  
+
   model.DBSession.add(TallgrassBrewingCo)
   model.DBSession.add(BoulevardBrewingCo)
   model.DBSession.add(KrackenRumCo)
@@ -43,6 +59,13 @@ def setup_app(command, conf, vars):
   model.DBSession.add(AustinNicholsDistillingCo)
   model.DBSession.add(AnheuserBusch)
   model.DBSession.add(FootHillsBrewing)
+  model.DBSession.add(MccormickDistillingCo)
+  model.DBSession.add(HobNobWineCo)
+  model.DBSession.add(WJDeutschSonsLtd)
+  model.DBSession.add(TheWineGroupInc)
+  model.DBSession.add(BacardiUsaInc)
+  model.DBSession.add(SchmittSohneInc)
+  model.DBSession.add(ChateauMontelena)
 
 #
 # REGIONS
@@ -55,6 +78,9 @@ def setup_app(command, conf, vars):
   KY = model.Region(5, "Kentucky", "makers of fine bourbon")
   CA = model.Region(6, "California", "beer, wine, cheese, and movies")
   NC = model.Region(7, "North Carolina", "This is a state located in the southeastern US")
+  FL = model.Region(8, "Florida", "Florida is a state in the southeastern United States, located on the nation's Atlantic and Gulf coasts.")
+  MD = model.Region(9, "Maryland", "Maryland is a state located in the Mid Atlantic region of the United States, bordering Virginia, West Virginia, and the District of Columbia to its south and west; Pennsylvania to its north; and Delaware to its east.")
+  
 
   model.DBSession.add(KS)
   model.DBSession.add(MO)
@@ -63,6 +89,8 @@ def setup_app(command, conf, vars):
   model.DBSession.add(KY)
   model.DBSession.add(CA)
   model.DBSession.add(NC)
+  model.DBSession.add(FL)
+  model.DBSession.add(MD)
 
 #
 # FOOD
@@ -164,15 +192,15 @@ def setup_app(command, conf, vars):
   TheKrackenBlackSpicedRum = model.Drink(6, "The Kracken Black Spiced Rum", 47, 3,-1,1,-1)
   JamesonIrishWhiskey = model.Drink(7, "Jameson Irish Whiskey", 40, 5,-1,6,-1)
   WildTurkeyBourbon = model.Drink(8, "Wild Turkey", 50.5, 5, -1,3,-1 )
-  BacardiSuperior = model.Drink(9, "Bacardi Superior", 40, -1, -1,2,-1)#add manu
-  McCormickVodka = model.Drink(10, "McCormick Vodka", 40, -1, -1, 7, -1)#add manu
+  BacardiSuperior = model.Drink(9, "Bacardi Superior", 40, 12, -1,2,-1)
+  McCormickVodka = model.Drink(10, "McCormick Vodka", 40, 8, -1, 7, -1)
 
   # Wine
-  RelaxRiesling = model.Drink(11, "Relax Riesling", 9.5, -1, -1,-1, 1)#add manu
-  HobnobPinotNoir = model.Drink(12, "Hobnob Pinot Noir", 13, -1, -1,-1,3)#add manu
-  YellowTailChardonnay = model.Drink(13, "Yellow Tail Chardonnay", 13.5, -1, -1,-1,2)#add manu
-  FranziaMerlot = model.Drink(14, "Franzia Merlot", 8.8, -1, -1,-1,4)#add manu
-  MontelenaEstateCabernetSauvignon = model.Drink(15, "Montelena Estate Cabernet Sauvignon", 14.3, -1, -1, -1 , 5)#add manu
+  RelaxRiesling = model.Drink(11, "Relax Riesling", 9.5, 13, -1,-1, 1)
+  HobnobPinotNoir = model.Drink(12, "Hobnob Pinot Noir", 13, 9, -1,-1,3)
+  YellowTailChardonnay = model.Drink(13, "Yellow Tail Chardonnay", 13.5, 10, -1,-1,2)
+  FranziaMerlot = model.Drink(14, "Franzia Merlot", 8.8, 11, -1,-1,4)
+  MontelenaEstateCabernetSauvignon = model.Drink(15, "Montelena Estate Cabernet Sauvignon", 14.3, -1, -1, -1 , 5)
 
   Budweiser = model.Drink(16, "Budweiser", 5.5, 6, 8, -1, -1)
   Foothills = model.Drink(17, "Foothills Baltic Porter", 9, 7, 9, -1, -1)
