@@ -32,11 +32,17 @@ def setup_app(command, conf, vars):
 
   AustinNicholsDistillingCo = model.Manufacturer(5, "Austin, Nichols Distilling Co.","1525 Tyrone Road Lawrenceburg, KY 40342","http://www.wildturkey.com/","(502) 839-2182","Austin, Nichols Distilling Co. produces bourbon under the name Wild Turkey and is based out of Kentucky.", 5) #region 5 is KY
 
+  AnheuserBusch = model.Manufacturer(6, "Anheuser-Busch Companies, Inc.", "1127 Lynch Street & Lynch St  St. Louis, MO 63118", "http://www.anheuser-busch.com/", "(314) 577-2333", "Produces the United States most popular beer.", 2)
+
+  FootHillsBrewing = model.Manufacturer(7, "Foothills Brewing Company", "638 W. 4th Street Winston-Salem, North Carolina United States", "(336) 777-3348", "http://www.foothillsbrewing.com/", "A small brewing company that produces a wide variety of beer", 7)
+
   model.DBSession.add(TallgrassBrewingCo)
   model.DBSession.add(BoulevardBrewingCo)
   model.DBSession.add(KrackenRumCo)
   model.DBSession.add(JohnJamesonandSonsLimited)
   model.DBSession.add(AustinNicholsDistillingCo)
+  model.DBSession.add(AnheuserBusch)
+  model.DBSession.add(FootHillsBrewing)
 
 #
 # REGIONS
@@ -48,6 +54,7 @@ def setup_app(command, conf, vars):
   NY = model.Region(4, "New York", "something about an apple")
   KY = model.Region(5, "Kentucky", "makers of fine bourbon")
   CA = model.Region(6, "California", "beer, wine, cheese, and movies")
+  NC = model.Region(7, "North Carolina", "This is a state located in the southeastern US")
 
   model.DBSession.add(KS)
   model.DBSession.add(MO)
@@ -55,6 +62,7 @@ def setup_app(command, conf, vars):
   model.DBSession.add(NY)
   model.DBSession.add(KY)
   model.DBSession.add(CA)
+  model.DBSession.add(NC)
 
 #
 # FOOD
@@ -120,6 +128,8 @@ def setup_app(command, conf, vars):
   IPA = model.Beer(5, "Ale", "IPA", "Heavily hopped beer", "NA")
   Stout = model.Beer(6, "Ale", "Stout", "lightly hopped and heavily malted beers with well roasted malt", "Dark brown/black")
   AmericanBrownAle = model.Beer(7,"Ale", "American Brown Ale", "often a mix of european malts to create a uniquely American brew", "brown")
+  Pilsner = model.Beer(8, "Lager", "Pilsner", "Most produced beer in the world. Examples include Budweiser and Coors", "light gold")
+  Porter = model.Beer(9, "Ale", "Porter", "An English beer popular among the working class, the porter is often ligther than the stout with moderate bitterness", "Dark brown to black")
 
   model.DBSession.add(Wheat)
   model.DBSession.add(DoubleESB)
@@ -128,10 +138,12 @@ def setup_app(command, conf, vars):
   model.DBSession.add(IPA)
   model.DBSession.add(Stout)
   model.DBSession.add(AmericanBrownAle)
+  model.DBSession.add(Pilsner)
+  model.DBSession.add(Porter)
 
 # Check both constraints
 
-  #error1 = model.Drink(16, "Fail Drink", 200, 1, 10, 10, 10)
+  #error1 = model.Drink(id, "Fail Drink", 200, 1, 10, 10, 10)
 
   #model.DBSession.add(error1)
 
@@ -140,36 +152,49 @@ def setup_app(command, conf, vars):
 #
 # (id, name, abv, manu_id, catbeer ID, catLiquor ID, catWine ID)
 # -1 if null....for now
+
+  # Beer
   TallgrassHalcyon = model.Drink(1,"Halcyon", 5, 1,1,-1,-1)
   TallgrassAle = model.Drink(2,"Tallgrass Ale", 4.4, 1,7,-1,-1)
   TallgrassOasis = model.Drink(3, "Oasis", 7.2, 1, 2, -1,-1)
   BoulevardAmberAle = model.Drink(4, "Amber Ale", 5.1, 2,3,-1,-1)
   BoulevardPaleAle = model.Drink(5,"Pale Ale", 5.4, 2, 4, -1,-1)
 
+  # Liquor
   TheKrackenBlackSpicedRum = model.Drink(6, "The Kracken Black Spiced Rum", 47, 3,-1,1,-1)
   JamesonIrishWhiskey = model.Drink(7, "Jameson Irish Whiskey", 40, 5,-1,6,-1)
   WildTurkeyBourbon = model.Drink(8, "Wild Turkey", 50.5, 5, -1,3,-1 )
   BacardiSuperior = model.Drink(9, "Bacardi Superior", 40, -1, -1,2,-1)#add manu
   McCormickVodka = model.Drink(10, "McCormick Vodka", 40, -1, -1, 7, -1)#add manu
 
+  # Wine
   RelaxRiesling = model.Drink(11, "Relax Riesling", 9.5, -1, -1,-1, 1)#add manu
   HobnobPinotNoir = model.Drink(12, "Hobnob Pinot Noir", 13, -1, -1,-1,3)#add manu
   YellowTailChardonnay = model.Drink(13, "Yellow Tail Chardonnay", 13.5, -1, -1,-1,2)#add manu
   FranziaMerlot = model.Drink(14, "Franzia Merlot", 8.8, -1, -1,-1,4)#add manu
   MontelenaEstateCabernetSauvignon = model.Drink(15, "Montelena Estate Cabernet Sauvignon", 14.3, -1, -1, -1 , 5)#add manu
 
+  Budweiser = model.Drink(16, "Budweiser", 5.5, 6, 8, -1, -1)
+  Foothills = model.Drink(17, "Foothills Baltic Porter", 9, 7, 9, -1, -1)
+
+  # beer
   model.DBSession.add(TallgrassHalcyon)
   model.DBSession.add(TallgrassAle)
   model.DBSession.add(TallgrassOasis)
   model.DBSession.add(BoulevardAmberAle)
   model.DBSession.add(BoulevardPaleAle)
 
+  model.DBSession.add(Budweiser)
+  model.DBSession.add(Foothills)
+
+  # liquor
   model.DBSession.add(TheKrackenBlackSpicedRum)
   model.DBSession.add(JamesonIrishWhiskey)
   model.DBSession.add(WildTurkeyBourbon)
   model.DBSession.add(BacardiSuperior)
   model.DBSession.add(McCormickVodka)
 
+  # wine
   model.DBSession.add(RelaxRiesling)
   model.DBSession.add(HobnobPinotNoir)
   model.DBSession.add(YellowTailChardonnay)
