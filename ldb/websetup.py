@@ -145,11 +145,13 @@ def setup_app(command, conf, vars):
   TallgrassOasis = model.Drink(3, "Oasis", 7.2, 1, 2, -1,-1)
   BoulevardAmberAle = model.Drink(4, "Amber Ale", 5.1, 2,3,-1,-1)
   BoulevardPaleAle = model.Drink(5,"Pale Ale", 5.4, 2, 4, -1,-1)
+
   TheKrackenBlackSpicedRum = model.Drink(6, "The Kracken Black Spiced Rum", 47, 3,-1,1,-1)
   JamesonIrishWhiskey = model.Drink(7, "Jameson Irish Whiskey", 40, 5,-1,6,-1)
   WildTurkeyBourbon = model.Drink(8, "Wild Turkey", 50.5, 5, -1,3,-1 )
   BacardiSuperior = model.Drink(9, "Bacardi Superior", 40, -1, -1,2,-1)#add manu
   McCormickVodka = model.Drink(10, "McCormick Vodka", 40, -1, -1, 7, -1)#add manu
+
   RelaxRiesling = model.Drink(11, "Relax Riesling", 9.5, -1, -1,-1, 1)#add manu
   HobnobPinotNoir = model.Drink(12, "Hobnob Pinot Noir", 13, -1, -1,-1,3)#add manu
   YellowTailChardonnay = model.Drink(13, "Yellow Tail Chardonnay", 13.5, -1, -1,-1,2)#add manu
@@ -161,11 +163,13 @@ def setup_app(command, conf, vars):
   model.DBSession.add(TallgrassOasis)
   model.DBSession.add(BoulevardAmberAle)
   model.DBSession.add(BoulevardPaleAle)
+
   model.DBSession.add(TheKrackenBlackSpicedRum)
   model.DBSession.add(JamesonIrishWhiskey)
   model.DBSession.add(WildTurkeyBourbon)
   model.DBSession.add(BacardiSuperior)
   model.DBSession.add(McCormickVodka)
+
   model.DBSession.add(RelaxRiesling)
   model.DBSession.add(HobnobPinotNoir)
   model.DBSession.add(YellowTailChardonnay)
@@ -174,4 +178,3 @@ def setup_app(command, conf, vars):
 
   transaction.commit()
   print "successfully setup"
-
