@@ -33,50 +33,33 @@
             knowledge about different styles of liquor, beer, and or wine. This project
             seeks to allow users to discover these new products along with other different
             items that could go along with it, such as food. </p>
-        <p> Those Python methods are responsible to create the dictionary of
-             variables that will be used in your web views (template).</p>
+        <p> The data we have within this project contains many different products that 
+            the average user might not know about. Within our demo page, we show how exactly
+            this website could work. We will give several examples with data to show the
+            result of each question. </p>
       </li>
       <li class="getting_started">
-        <h3>Reuse the web page elements</h3>
-        <p> A web page viewed by user could be constructed by single or 
-            several reusable templates under <strong>/templates</strong>. 
-            Take 'about' page for example, each reusable templates generating 
-            a part of the page. We'll cover them in the order of where they are 
-            found, listed near the top of the about.html template</p>
-        <p> <strong><span class="code">header.html</span></strong> - The 
-            "header.html" template contains the HTML code to display the 
-            'header': The blue gradient, TG2 logo, and some site text at the 
-            top of every page it is included on. When the "about.html" template 
-            is called, it includes this "header.html" template (and the others) 
-            with a <span class="code">&lt;xi:include /&gt;</span> tag, part of 
-            the Genshi templating system. The "header.html" template is not a 
-            completely static HTML -- it also dynamically displays the current 
-            page name with a Genshi template method called "replace" with the 
-            code: <span class="code">&lt;span py:replace="page"/&gt;</span>. 
-            It means replace this <span class="code">&lt;span /&gt;</span> 
-            region with the contents found in the variable 'page' that has 
-            been sent in the dictionary to this "about.html" template, and is 
-            available through that namespace for use by this "header.html" 
-            template.  That's how it changes in the header depending on what 
-            page you are visiting.
-        </p>
-        <p> <strong><span class="code">sidebars.html</span></strong> - The
-             sidebars (navigation areas on the right side of the page) are 
-             generated as two separate <span class="code">py:def</span> blocks 
-             in the "sidebars.html" template.  The <span class="code">py:def</span> 
-             construct is best thought of as a "macro" code... a simple way to 
-             separate and reuse common code snippets.  All it takes to include 
-             these on the "about.html" page template is to write  
-             <span class="code">
-<br/><br/>
-    $${sidebar_top()}
-<br/>
-    $${sidebar_bottom()}
-<br/><br/>       
-        </span> in the page where they are wanted.  CSS styling (in 
-        "/public/css/style.css") floats them off to the right side.  You can 
-        remove a sidebar or add more of them, and the CSS will place them one 
-        atop the other.</p>
+        <h3>How was it built?</h3>
+        <p> <strong><span class="code">paster quickstart</span></strong> -- This project was initially
+            created using the paster quickstart script which is built into TurboGears. 
+            This script allows us to generate the code required to begin the project.</p>
+        <p> <strong><span class="code">data.py</span></strong> - The main work behind
+            the database file is created in <strong>data.py</strong>. Each part of the
+            database is known as a class in python. Each class has an 
+            <span class="code">init</span> function that takes its attributes and 
+            initializes each class. Each class is given a table name so that the project knows
+            what to call the table when other parts of the project references it.
+            Not only does each class have its own attributes, but many of our classes
+            also require foreign keys.</p>
+            <p> <strong><span class="code">websetup.py</span></strong> - Within this python file, 
+            we enter in all of our setup data. When we compile our project, PasterScript goes
+            through this file and uses <strong>DBSession</strong> within SQLAchemy to add
+            each value into our tables. First, you add each attribute, using the definition we
+            set up within data.py, and then we use DBSession to <i>add</i> the new created
+            value into the specific table. DBSession uses <strong>transactions</strong>
+            built into its framework so that if there are errors while generating the database,
+            or if there are erros at run time while users are manipulating the database,
+            DBSession will rollback the DB automatically.</p>
         <p>This is, of course, also exactly how the header and footer 
             templates are also displayed in their proper places, but we'll 
             cover that in the "master.html" template below.</p>
