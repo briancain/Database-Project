@@ -8,31 +8,32 @@
 
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
-  <title>Quick overview of the Liquor Database</title>
+  <title>Learning TurboGears 2.0: Quick guide to the Quickstart pages.</title>
 </head>
 
 <body>
     ${sidebar_top()}
     ${sidebar_bottom()}
   <div id="getting_started">
-    <h2>Architectural basics of our project</h2>
-    <p>Quick information about our project. Here's how it works.</p>
+    <h2>Architectural basics of a quickstart TG2 site.</h2>
+    <p>The TG2 quickstart command produces this basic TG site.  Here's how it works.</p>
     <ol id="getting_started_steps">
       <li class="getting_started">
-        <h3>Introduction</h3>
-        <p> One of the main reasons why this database exists is to have a centralized location
-            of information about <strong>liquor, beer, and wine</strong>.</p>
-        <p> Our idea behind the project was for users to discover new and interesting drinks 
-            that they might have never heard of or tried before. Our end goal was to provide 
-            an easy to use website that would allow a user to query our database and discover 
-            new drinks within our database.</p>
+        <h3>Code my data model</h3>
+        <p> When you want a model for storing favorite links or wiki content, 
+            the <strong>/model</strong> folder in your site is ready to go.</p>
+        <p> You can build a dynamic site without any data model at all. There 
+            still be a default data-model template for you if you didn't enable 
+            authentication and authorization in quickstart. If you enabled
+            it, you got auth data-model made for you.</p>
       </li>
       <li class="getting_started">
-        <h3>What is this?</h3>
-        <p> This website is geared towards users who are interested in expanding their
-            knowledge about different styles of liquor, beer, and or wine. This project
-            seeks to allow users to discover these new products along with other different
-            items that could go along with it, such as food. </p>
+        <h3>Design my URL structure</h3>
+        <p> The "<span class="code">root.py</span>" file under the 
+            <strong>/controllers</strong> folder has your URLs.  When you 
+            called this url (<span class="code"><a href="${tg.url('/about')}">about</a></span>), 
+            the command went through the RootController class to the 
+            <span class="code">about</span><span class="code">()</span> method.</p>
         <p> Those Python methods are responsible to create the dictionary of
              variables that will be used in your web views (template).</p>
       </li>

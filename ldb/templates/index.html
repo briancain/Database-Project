@@ -8,27 +8,26 @@
 
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
-  <title>Welcome to TurboGears 2.0, standing on the 
-  shoulders of giants, since 2007</title>
+  <title>Welcome to the Liquor Database</title>
 </head>
 
 <body>
     ${sidebar_top()}
   <div id="getting_started">
     <h2>CIS 560 Database Presentation</h2>
-    <p>Welcome to the liquor database. Please go to the search tab to view data.</p>
+    <p>Welcome to the liquor database. Please go to the data tab to view data.</p>
     <ol id="getting_started_steps">
       <li class="getting_started">
         <h3>TurboGears with SQLAlchemy</h3>
-        <p>Our database was compiled with Paster, written in Python using SQLAlchemy</p>
+        <p>Our database was compiled with PasterScript, written in Python using SQLAlchemy</p>
       </li>
       <li class="getting_started">
         <h3>The Website</h3>
-        <p>Information about how the website was made and what tools were used can go here. For more information, please visit our About tab.</p>
+        <p>Information about how the website was made and what tools were used can go here. For more information, please visit our <a href="${tg.url('/about')}">about</a> tab.</p>
       </li>
       <li class="getting_started">
-        <h3>The Final Product</h3>
-        <p>Put a link to our tools here?</p>
+        <h3>A demo of the site</h3>
+        <p>Please visit our <a href="${tg.url('/derp')}">demo</a> tab to see a work in progress.</p>
       </li>
     </ol>
   </div>
