@@ -46,10 +46,10 @@ class RootController(BaseController):
         """Handle the front-page."""
         return dict(page='index')
 
-    @expose('ldb.templates.page')
-    def page(self):
-        page = DBSession.query(Beer).order_by("id").all()
-        return dict(beerpage=page)
+    #@expose('ldb.templates.page')
+    #def page(self):
+    #   page = DBSession.query(Beer).order_by("id").all()
+    #   return dict(beerpage=page)
 
     @expose('ldb.templates.about')
     def about(self):
@@ -114,32 +114,46 @@ class RootController(BaseController):
     def derp(self):
         colModel = [
             {'display':'ID', 'name':'id', 'width':20, 'align':'center'},
-            {'display':'Category', 'name':'title', 'width':80, 'align':'left'},
-            {'display':'Style', 'name':'description', 'width':100, 'align':'left'},
-            {'display':'About', 'name':'year', 'width':40, 'align':'center'},
-            {'display':'Color', 'name':'genera', 'width':40, 'align':'center'}
+            {'display':'Category', 'name':'category', 'width':140, 'align':'left'},
+            {'display':'Style', 'name':'style', 'width':140, 'align':'left'},
+            {'display':'About', 'name':'about', 'width':220, 'align':'center'},
+            {'display':'Color', 'name':'color', 'width':120, 'align':'center'}
         ]
-       
-        grid = FlexiGrid(id='flex', fetchURL='fetch', title='Beers',
+        searchitems = [
+            {'display':'ID', 'name':'id', 'isdefault':True},
+            {'display':'Category', 'name':'category'},
+            {'display':'Style', 'name':'style'}
+        ]
+        grid = FlexiGrid(id='flex', fetchURL='fetch', title='Beer',
             colModel=colModel, useRp=True, rp=10,
             sortname='id', sortorder='asc', usepager=True,
-            width=600,
+            searchitems=searchitems,
+            showTableToggleButton=True,
+       #    buttons=buttons,
+            width=700,
             height=200
         )
         pylons.tmpl_context.grid = grid
-        return dict(page = 'derp')
+        beers = DBSession.query( Beer ).order_by( Beer.id )
+        return dict(page = 'derp',
+                    beers = beers, )
 
     @expose('json')
     #@validate(validators={"page":validators.Int(), "rp":validators.Int()})
-    def fetch(self, page=1, rp=25, sortname='id', sortorder='asc', qtype=None, query=None):
-        offset = (page-1) * rp
+    def fetch(self, page=1, rp=25, sortname='id', sortorder='asc', qtype=None, query=None): 
+        try: 
+            offset = (int(page)-1) * int(rp) 
+        except: 
+            page = 1 
+            rp=25 
+            offset = (int(page)-1) * int(rp)
         if (query):
             #d = {qtype:query}
             beers = DBSession.query(Beer)
         else:
             beers = DBSession.query(Beer)
         total = beers.count()
-        column = getattr(Beer.c, sortname)
+        column = getattr(Beer, sortname)
         #beers = beers.order_by(getattr(column,sortorder)()).offset(offset).limit(rp)
         rows = [{'id'  : beer.id,
                  'cell': [beer.id, beer.category, beer.style, beer.about, beer.color]} for beer in beers]
