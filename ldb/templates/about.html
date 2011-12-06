@@ -63,11 +63,15 @@
       </li>
       <li class="getting_started">
         <h3>How to compile and run?</h3>
+        <p> First, you must make sure you are located within the home folder of this project.</p>
         <p> <strong><span class="code">paster setup-app deveopment.ini</span></strong> -- This line
-            will set up the project using <strong>data.py></strong> and <strong>websetup.py</strong>.
-            However, for this to work properly you must <u><strong>delete the devdata.db</strong></u> file.
-            If you do not do this, paster will attempt to add the same data to the DB file and will fail,
-            thus rolling back the changes.</p>
+            will set up the project using <strong>data.py</strong> and <strong>websetup.py</strong>.
+            However, for this to work properly you must <u><strong>delete the devdata.db</strong></u> file
+            (assuming it exists). If you do not do this, paster will attempt to add the same data to 
+            the DB file and will fail, thus rolling back the changes.</p>
+        <p> <strong><span class="code">paster serve development.ini</span></strong> -- This line
+            will compile the server and host the project onto the local host. Once you run this script
+            it will display the URL for where the project is being hosted.</p>
       </li>
     </ol>
     <p>Good luck with TurboGears 2!</p>
