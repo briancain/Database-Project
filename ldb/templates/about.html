@@ -15,10 +15,21 @@
     ${sidebar_top()}
     ${sidebar_bottom()}
   <div id="getting_started">
-    <h2>Architectural basics of our project</h2>
+    <h2><u>About</u></h2>
+    <ul>
+      <li><a href="#info">Architectural Basics</a></li>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#about">About This Project</a></li>
+      <li><a href="#code">About The Code</a></li>
+      <li><a href="#build">How To Build</a></li>
+      <li><a href="#team">About The Team</a></li>
+    </ul>
+    <a name="info"></a>
+    <h2><u>Architectural basics of our project</u></h2>
     <p>Quick information about our project. Here's how it works.</p>
     <ol id="getting_started_steps">
       <li class="getting_started">
+        <a name="intro"></a>
         <h3>Introduction</h3>
         <p> One of the main reasons why this database exists is to have a centralized location
             of information about <strong>liquor, beer, and wine</strong>.</p>
@@ -28,6 +39,7 @@
             new drinks within our database.</p>
       </li>
       <li class="getting_started">
+        <a name="about"></a>
         <h3>What is this?</h3>
         <p> This website is geared towards users who are interested in expanding their
             knowledge about different styles of liquor, beer, and or wine. This project
@@ -39,6 +51,7 @@
             result of each question. </p>
       </li>
       <li class="getting_started">
+        <a name="#code"></a>
         <h3>How was it built?</h3>
         <p> <strong><span class="code">paster quickstart</span></strong> -- This project was initially
             created using the paster quickstart script which is built into TurboGears. 
@@ -62,6 +75,7 @@
             DBSession will rollback the DB automatically.</p>
       </li>
       <li class="getting_started">
+        <a name="build"></a>
         <h3>How to compile and run?</h3>
         <p> First, you must make sure you are located within the home folder of this project.</p>
         <p> <strong><span class="code">paster setup-app deveopment.ini</span></strong> -- This line
@@ -75,7 +89,8 @@
             it will display the URL for where the project is being hosted.</p>
       </li>
     </ol>
-    <h2>About our Team</h2>
+    <a name="team"></a>
+    <h2><u>About our Team</u></h2>
     <p>A quick overview of our team</p>
     <ul id="getting_started_steps">
       <table>
