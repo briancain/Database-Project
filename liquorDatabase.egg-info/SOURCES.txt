@@ -48,14 +48,15 @@ ldb/templates/__init__.py
 ldb/templates/__init__.pyc
 ldb/templates/about.html
 ldb/templates/authentication.html
+ldb/templates/backupabout.html
 ldb/templates/debug.html
+ldb/templates/derp.html
 ldb/templates/error.html
 ldb/templates/footer.html
 ldb/templates/header.html
 ldb/templates/index.html
 ldb/templates/login.html
 ldb/templates/master.html
-ldb/templates/page.html
 ldb/templates/sidebars.html
 ldb/tests/__init__.py
 ldb/tests/functional/__init__.py

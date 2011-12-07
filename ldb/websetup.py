@@ -21,6 +21,7 @@ def setup_app(command, conf, vars):
 #
 # MANUFACTURERS
 #
+#
 # (id, name, address, phone, web, about, region_id)
   TallgrassBrewingCo = model.Manufacturer(1,"Tallgrass Brewing Co.", "8845 Quail Lane Manhattan, KS 66502", "http://www.tallgrassbeer.com/","(785) 537-1131", "Tallgrass Brewing Co. is a microbrewery based out of Manhattan, Kansas.", 1) #region 1 is kansas
 
