@@ -53,6 +53,9 @@ class RootController(BaseController):
         """Handle the contact page"""
         return dict(page='contact')
 
+
+   
+
     #@expose('ldb.templates.page')
     #def page(self):
     #   page = DBSession.query(Beer).order_by("id").all()
@@ -317,3 +320,9 @@ class RootController(BaseController):
 
         #query the DB session
         #DBSession.query( Beer )
+
+
+    @expose('ldb.templates.food')
+    def food(self):
+        """Handle the food-page."""
+        return dict(page='food')
