@@ -21,53 +21,38 @@ def setup_app(command, conf, vars):
 #
 # MANUFACTURERS
 #
-#
 # (id, name, address, phone, web, about, region_id)
-  TallgrassBrewingCo = model.Manufacturer(1,"Tallgrass Brewing Co.", "8845 Quail Lane Manhattan, KS 66502", "http://www.tallgrassbeer.com/","(785) 537-1131", "Tallgrass Brewing Co. is a microbrewery based out of Manhattan, Kansas.", 1) #region 1 is kansas
+  TallgrassBrewingCo = model.Manufacturer(1,"Tallgrass Brewing Co.", "8845 Quail Lane Manhattan, KS 66502", "(785) 537-1131", "http://www.tallgrassbeer.com/", "Tallgrass Brewing Co. is a microbrewery based out of Manhattan, Kansas.", 1) #region 1 is kansas
 
-  BoulevardBrewingCo = model.Manufacturer(2, "Boulevard Brewing Co.", "2501 Southwest Boulevard Kansas City, MO 64108",	"http://www.boulevard.com/",	"(816) 474-7095","Boulevard Brewing Co. is a microbrewery based out of Kansas City, Missouri.", 2) #region 2 is missouri
+  BoulevardBrewingCo = model.Manufacturer(2, "Boulevard Brewing Co.", "2501 Southwest Boulevard Kansas City, MO 64108",	"(816) 474-7095", "http://www.boulevard.com/", "Boulevard Brewing Co. is a microbrewery based out of Kansas City, Missouri.", 2) #region 2 is missouri
 
-  KrackenRumCo = model.Manufacturer(3, "Kracken Rum Co.",	"333 Washington St. Jersey City, NJ 07302", "0000", "http://www.krakenrum.com/site.html","Kracken Rum Co. produces rum from a verity of different spices from Trinidad and Tobago.", 3)#region 3 is NJ
+  KrackenRumCo = model.Manufacturer(3, "Kracken Rum Co.",	"333 Washington St. Jersey City, NJ 07302", "1-800-837-8452", "http://www.krakenrum.com/site.html","Kracken Rum Co. produces rum from a verity of different spices from Trinidad and Tobago.", 3)#region 3 is NJ
 
-  JohnJamesonandSonsLimited = model.Manufacturer(4, "John Jameson & Sons Limited",	"777 Westchester Ave. West Harrison , NY 10604", "http://www.jamesonwhiskey.com/", "(914) 539-4500","John Jameson & Sons Limited produces Irish Whiskey that is triple distilled to create a more smother taste.", 4) #region 4 is NY
+  JohnJamesonandSonsLimited = model.Manufacturer(4, "John Jameson & Sons Limited",	"777 Westchester Ave. West Harrison , NY 10604", "(914) 539-4500", "http://www.jamesonwhiskey.com/","John Jameson & Sons Limited produces Irish Whiskey that is triple distilled to create a more smother taste.", 4) #region 4 is NY
 
-  AustinNicholsDistillingCo = model.Manufacturer(5, "Austin, Nichols Distilling Co.","1525 Tyrone Road Lawrenceburg, KY 40342","http://www.wildturkey.com/","(502) 839-2182","Austin, Nichols Distilling Co. produces bourbon under the name Wild Turkey and is based out of Kentucky.", 5) #region 5 is KY
+  AustinNicholsDistillingCo = model.Manufacturer(5, "Austin, Nichols Distilling Co.","1525 Tyrone Road Lawrenceburg, KY 40342", "(502) 839-2182", "http://www.wildturkey.com/","Austin, Nichols Distilling Co. produces bourbon under the name Wild Turkey and is based out of Kentucky.", 5) #region 5 is KY
 
-  AnheuserBusch = model.Manufacturer(6, "Anheuser-Busch Companies, Inc.", "1127 Lynch Street & Lynch St  St. Louis, MO 63118", "http://www.anheuser-busch.com/", "(314) 577-2333", "Produces the United States most popular beer.", 2)
+  SamuelAdamsBrewery = model.Manufacturer(40, "Samuel Adams Brewery", "Samuel Adams Brewery, 30 Germania St, Boston, Suffolk, MA 02130-2315", "(617) 368-5080", "www.samueladams.com", "Samuel Adams is an American brand of beer brewed by the Boston Beer Company", 50)
 
-  FootHillsBrewing = model.Manufacturer(7, "Foothills Brewing Company", "638 W. 4th Street Winston-Salem, North Carolina United States", "(336) 777-3348", "http://www.foothillsbrewing.com/", "A small brewing company that produces a wide variety of beer", 7)
+  StoneBrewingCo = model.Manufacturer(41, "Stone Brewing Co", "1999 Citracado Parkway Escondido, CA 92029", "(760) 471-4999", "www.stonebrew.com", "Stone Brewing Co. is a craft brewery headquartered in Escondido, California. Founded in 1996 in San Marcos, California,[1] it is the largest brewery in Southern California.", 6)
 
-  MccormickDistillingCo = model.Manufacturer(8,"McCormick Distilling Co.", "1 Mc Cormick Ln, Weston, MO 66502", "http://www.mccormickdistilling.com/","(816) 640-2276", "McCormick Distilling, located in historic Weston, Missouri, is the oldest continuously operating distillery in the U.S.", 2)
+  NewBelgium = model.Manufacturer(42, "New Belgium Brewing Company", "500 Linden Street Fort Collins, CO, USA", "970-221-0524", "www.newbelgium.com", "Creates New Belgium Beers", 49)
 
-  HobNobWineCo = model.Manufacturer(9,"HobNob Wine Company", "709 Westchester Ave., Suite 300, White Plains, NY 10604", "http://www.hobnobwines.com/","(914) 251-9463", "HobNob Wine Company offers fine French wines at California prices.", 4)
+  Rouge = model.Manufacturer(43, "Rouge Brewery", "748 SW Bay Blvd. Newport, OR 97365", "(541) 265-3188", "www.Rogue.com", "Makes Rouge Beer", 48)
 
-  WJDeutschSonsLtd = model.Manufacturer(10,"W.J. Deutsch & Sons Ltd.", "709 Westchester Ave., Suite 300, White Plains, NY 10604", "http://www.wjdeutsch.com/","(914) 251-9463", "W.J.Deutsch & Sons builds brands that offer approachable wine experiences which contribute to a premium lifestyle for the mainstream and wine enthusiast consumer.", 4)
-
-  TheWineGroupInc = model.Manufacturer(11,"The Wine Group, Inc.", "315 Montgomery St., San Francisco, CA 94104", "http://www.thewinegroup.org/","(415) 986-8700", "The Wine Group, known for its Franzia wine in a box, the company was founded in 1981.", 6)
-
-  BacardiUsaInc = model.Manufacturer(12,"Bacardi USA, Inc.", "2701 Le Jeune Rd., Coral Gables, FL 33134", "http://www.Barcardi.com/","(305) 573-8511", "Bacardi is a family-controlled spirits company, best known as a producer of rums.", 8)
-
-  SchmittSohneInc = model.Manufacturer(13,"Schmitt Sohne, Inc.", "1111 Benfield Blvd., Suite 112, Millersville, MD 21108", "http://www.schmitt-soehne.com/","(410) 729-4083", "Schmitt Sohne is the leading importer of German Rieslings.", 9)
-
-  ChateauMontelena = model.Manufacturer(14,"Chateau Montelena Winery", "1429 Tubbs Lane, Calistoga, CA 94515", "http://www.montelena.com/","(707) 942-5105", "Chateau Montelena is a Napa Valley winery, most famous for winning the white wine section of the historic Judgement of Paris wine competition.", 6)
+  Kuhnhenn = model.Manufacturer(44, "Kuhnhenn Brewing Company", "5919 Chicago Rd, Warren, Michigan, 48092-1606", "(586) 979-836", "www.kbrewery.com", "Makes Brews", 47)
 
   
-
+  model.DBSession.add(Kuhnhenn)
+  model.DBSession.add(Rouge)
+  model.DBSession.add(NewBelgium)
+  model.DBSession.add(StoneBrewingCo)
   model.DBSession.add(TallgrassBrewingCo)
   model.DBSession.add(BoulevardBrewingCo)
   model.DBSession.add(KrackenRumCo)
   model.DBSession.add(JohnJamesonandSonsLimited)
   model.DBSession.add(AustinNicholsDistillingCo)
-  model.DBSession.add(AnheuserBusch)
-  model.DBSession.add(FootHillsBrewing)
-  model.DBSession.add(MccormickDistillingCo)
-  model.DBSession.add(HobNobWineCo)
-  model.DBSession.add(WJDeutschSonsLtd)
-  model.DBSession.add(TheWineGroupInc)
-  model.DBSession.add(BacardiUsaInc)
-  model.DBSession.add(SchmittSohneInc)
-  model.DBSession.add(ChateauMontelena)
-
+  model.DBSession.add(SamuelAdamsBrewery)
 #
 # REGIONS
 #
@@ -78,21 +63,23 @@ def setup_app(command, conf, vars):
   NY = model.Region(4, "New York", "something about an apple")
   KY = model.Region(5, "Kentucky", "makers of fine bourbon")
   CA = model.Region(6, "California", "beer, wine, cheese, and movies")
-  NC = model.Region(7, "North Carolina", "This is a state located in the southeastern US")
-  FL = model.Region(8, "Florida", "Florida is a state in the southeastern United States, located on the nation's Atlantic and Gulf coasts.")
-  MD = model.Region(9, "Maryland", "Maryland is a state located in the Mid Atlantic region of the United States, bordering Virginia, West Virginia, and the District of Columbia to its south and west; Pennsylvania to its north; and Delaware to its east.")
-  
 
+  MA = model.Region(50, "Massachusetts", "Boston and some other stuff")
+  CO = model.Region(49, "Colorado", "Pretty mountains and low obesity rate")
+  OR = model.Region(48, "Oregon", "Nike and rain")
+  MI = model.Region(47, "Michigan", "Big Lakes and dying manufacturing plants")
+
+  model.DBSession.add(MI)
+  model.DBSession.add(OR)
+  model.DBSession.add(CO) 
   model.DBSession.add(KS)
   model.DBSession.add(MO)
   model.DBSession.add(NJ)
   model.DBSession.add(NY)
   model.DBSession.add(KY)
   model.DBSession.add(CA)
-  model.DBSession.add(NC)
-  model.DBSession.add(FL)
-  model.DBSession.add(MD)
 
+  model.DBSession.add(MA)
 #
 # FOOD
 #
@@ -120,6 +107,16 @@ def setup_app(command, conf, vars):
   Merlot = model.Wine(4, "Red", "Merlot", "NA", "Red", "Merlot")
   CabernetSauvignon = model.Wine(5, "Red", "Cabernet Sauvignon", "NA", "Red", "NA")
 
+  SauvignonBlac = model.Wine(6, "White", "Sauvignon Blanc", "NA", "White", "Sauvignon Blac")
+  Zinfandel = model.Wine(7, "Red", "Zinfandel", "NA", "Red", "Zinfandel")
+  PinotGrigio = model.Wine(8, "White", "Pinot Grigio", "NA", "White", "Pinot Gris")
+  Shiraz = model.Wine(9, "Red", "Shiraz", "NA", "Red", "Shiraz")
+  
+  model.DBSession.add(SauvignonBlac)
+  model.DBSession.add(Zinfandel)
+  model.DBSession.add(PinotGrigio)
+  model.DBSession.add(Shiraz)
+  
   model.DBSession.add(Riesling)
   model.DBSession.add(Chardonnay)
   model.DBSession.add(PinotNoir)
@@ -131,12 +128,14 @@ def setup_app(command, conf, vars):
 #
 # (id, category, style, about, color, ingredients)
   SpicedRum = model.Liquor(1, "Rum", "Spiced", "caribbean historically", "white-dark brown", "sugar cane")
-  Rum = model.Liquor(2,"Rum", "plain", "caribean historicaly", "white-dark brown", "sugar cane")
+  Rum = model.Liquor(2,"Rum", "plain", "caribbean historicaly", "white-dark brown", "sugar cane")
   Bourbon = model.Liquor(3,"Whiskey", "Bourbon", "Southern U.S.", "amber", "corn")
   Rye = model.Liquor(4, "Whiskey", "Rye", "NA", "amber", "rye")
   Scotch = model.Liquor(5, "Whiskey", "Scotch", "Scotland", "amber", "barley")
   Irish = model.Liquor(6, "Whiskey", "Irish", "Ireland", "amber", "barley")
   Vodka = model.Liquor(7, "Vodka", "Vodka", "Russia", "clear", "potatoes")
+  Tequila = model.Liquor(8, "Tequila", "Tequila", "Americas", "Clear or brown", "agave")
+
 
   model.DBSession.add(SpicedRum)
   model.DBSession.add(Rum)
@@ -145,7 +144,7 @@ def setup_app(command, conf, vars):
   model.DBSession.add(Scotch)
   model.DBSession.add(Irish)
   model.DBSession.add(Vodka)
-
+  model.DBSession.add(Tequila)
 #
 # BEER CATEGORIES
 #
@@ -157,8 +156,60 @@ def setup_app(command, conf, vars):
   IPA = model.Beer(5, "Ale", "IPA", "Heavily hopped beer", "NA")
   Stout = model.Beer(6, "Ale", "Stout", "lightly hopped and heavily malted beers with well roasted malt", "Dark brown/black")
   AmericanBrownAle = model.Beer(7,"Ale", "American Brown Ale", "often a mix of european malts to create a uniquely American brew", "brown")
-  Pilsner = model.Beer(8, "Lager", "Pilsner", "Most produced beer in the world. Examples include Budweiser and Coors", "light gold")
-  Porter = model.Beer(9, "Ale", "Porter", "An English beer popular among the working class, the porter is often ligther than the stout with moderate bitterness", "Dark brown to black")
+
+  BarleyWine = model.Beer(8,"Ale", "Barely Wine", "Strong beer (10-18 ABV) that is ususally stored for 18 months to two years", "Dark")
+  BlondAle  = model.Beer(9, "Ale", "Blond Ale", "An American invention created from the craft brew movement, this beer is similar to a Kolsch. Often an all malt brew, lightly hopped and similar to some lagers", "Pale straw to deep gold")
+  Dubbel  = model.Beer(10, "Ale", "Dubbel", "Rich malty Belgian beer with mild hoppiness and caramel malt", "dark amber")
+  Quadrupel  = model.Beer(11, "Ale", "Quadrupel", "Strong Belgian style ale with low bitterness and full bodied malt, often high ABV", "dark brown, garnet")
+  Trappist = model.Beer(13, "Ale", "Trappist", "Only seven trappist breweries in the world, refers to the association with monasitc orders", "NA")
+  Tripel  = model.Beer(14, "Ale", "Tripel", "Name refers to use of three times as much malt that standard trappist ale. Dense and creamy beer with heavy maltiness and balanced hoppiness. High ABV", "gold")
+  Porter = model.Beer(15, "Ale", "Porter", "An English beer popular among the working class, the porter is often lighter than the stout with moderate bitterness", "dark brown to black")
+  Kolsch  = model.Beer(34, "Ale", "Kolsch", "Originally from Koln, Germany, this beer is light to medium bodied with with assertive hoppiness", "pale")
+  Altbier  = model.Beer(16, "Ale", "Altbier", "A German style brown ale with a longer period of fermentaion than most beers. Medium bodied with a balance between malt and hops", "amber to dark brown")
+  EnglishBitter  = model.Beer(17, "Ale", "English Bitter", "The English bitter is composed of pale malts, high hop levels, and low carbonation", "gold to copper")
+  Saison  = model.Beer(18, "Ale", "Saison", "Sometimes called country beer, this medium alcohol beer is originally from rural Belgium, often spicy", "orange, brown, some pale")
+  ScotchAle  = model.Beer(19, "Ale", "Scotch Ale", "Heavily carmalized wort results in low hop character and hight maltiness, sometimes smokey", "deep copper to brown")
+  Weisse  = model.Beer(20, "Ale", "Weisse", "A bottle conditioned beer with sour and tart flavor. Sometimes flavored with fruit", "pale gold, straw")
+  Dunkel  = model.Beer(21, "Ale", "Dunkel", "A German wheat beer brewed with darker malts and and containing a low bitterness", "Brown and hazy")
+  Hefeweizen  = model.Beer(22, "Ale", "Hefewizen", "A German wheat beer made with high quantities of wheat, typically unfiltered and cloudy", "pale straw")
+  Weizenbock  = model.Beer(23, "Ale", "Weizenbock", "A heavier version of the dunkel, often high ABV", "dark brown")
+  Witbier  = model.Beer(24, "Ale", "Witbier", "Wit, or white, is often pale golden and tart with high levels of CO2" , "pale golden")
+  Doppelbock  = model.Beer(25, "Lager", "Doppelbock", "The doppelbock is a stronger, maltier version of the boch, often called a meal in a glass", "dark amber to black")
+  Eisbock  = model.Beer(26, "Lager", "Eisbock", "The Eisbock is created by freezing of a portion of the water from the beer and removing it, this results in a high ABV of 9-15", "black to straw to red")
+  Maibock  = model.Beer(27, "Lager", "Maibock", "A light boch, the Maibock has a significant hop flavor and is often a spring beer", "light straw")
+  Marzen  = model.Beer(28, "Lager", "Marzen", "Also know as an Octoberfest, the Marzen is traditionally brewed during colder months. The marzen has a medium to high alcohol content and is typically full bodied with rich maltiness", "dark copper")
+  Dortmunder  = model.Beer(29, "Lager", "Dortmunder", "A bitter lager with discuity malts", "pale gold")
+  Pilsner  = model.Beer(30, "Lager", "Pilsner", "Most produced beer in the world. Examples include Budweiser and Coors", "light gold")
+  Schwarzbier  = model.Beer(31, "Lager", "Schwarzbier", "A German black beer, the name does not refer to characteristics", "black")
+  Kellerbier  = model.Beer(32, "Lager", "Kellerbier", "An unpasterurized lager dating back to the middle ages with a cloudy look and high hoppiness", "straw to golden")
+  Lambic  = model.Beer(33, "Ale", "Lambic", "A beer that is brewed traditionaly with wild yeast and bacteria in tainted barrels, the lambic has tart bitterness similar to a cider", "cloudy straw")
+
+  model.DBSession.add(BarleyWine)
+  model.DBSession.add(BlondAle)
+  model.DBSession.add(Dubbel)
+  model.DBSession.add(Quadrupel)
+  model.DBSession.add(Trappist)
+  model.DBSession.add(Tripel)
+  model.DBSession.add(Porter)
+  model.DBSession.add(Kolsch)
+  model.DBSession.add(Altbier)
+  model.DBSession.add(EnglishBitter)
+  model.DBSession.add(Saison)
+  model.DBSession.add(ScotchAle)
+  model.DBSession.add(Weisse)
+  model.DBSession.add(Dunkel)
+  model.DBSession.add(Hefeweizen)
+  model.DBSession.add(Weizenbock)
+  model.DBSession.add(Witbier)
+  model.DBSession.add(Doppelbock)
+  model.DBSession.add(Eisbock)
+  model.DBSession.add(Maibock)
+  model.DBSession.add(Marzen)
+  model.DBSession.add(Dortmunder)
+  model.DBSession.add(Pilsner)
+  model.DBSession.add(Schwarzbier)
+  model.DBSession.add(Kellerbier)
+  model.DBSession.add(Lambic)
 
   model.DBSession.add(Wheat)
   model.DBSession.add(DoubleESB)
@@ -167,68 +218,231 @@ def setup_app(command, conf, vars):
   model.DBSession.add(IPA)
   model.DBSession.add(Stout)
   model.DBSession.add(AmericanBrownAle)
-  model.DBSession.add(Pilsner)
-  model.DBSession.add(Porter)
-
-# Check both constraints
-
-  #error1 = model.Drink(id, "Fail Drink", 200, 1, 10, 10, 10)
-
-  #model.DBSession.add(error1)
 
 #
 # DRINKS
 #
 # (id, name, abv, manu_id, catbeer ID, catLiquor ID, catWine ID)
 # -1 if null....for now
-
-  # Beer
+   
+  TallgrassBuffaloSweat = model.Drink(100, "Buffalo Sweat", 5.0, 1,6,-1,-1)
+  TallgrassIPA = model.Drink(101, "IPA", 6.3, 1, 5,-1,-1)
+  BoulevardBob = model.Drink(102, "Bob's 47 Oktoberfest",5.8, 2, 28, -1, -1)
+  BoulevardBoss = model.Drink(103, "Boss Tom's Golden Bock", 6.1, 2, 27, -1, -1)
+  BoulevardBully = model.Drink(104, "Bully! Porter", 5.4, 2, 15, -1, -1)
+  BoulevardTruth = model.Drink(105, "Dark Truth Stout", 9.7, 2, 6, -1,-1)
+  BoulevardIPA = model.Drink(106, "Double-Wide IPA", 8.5, 2, 5, -1, -1)
+  BoulevardDry = model.Drink(107, "Dry Stout", 4.9 ,2, 6, -1, -1)
+  BoulevardTripel = model.Drink(108, "Long Strange Tripel", 9, 2, 14, -1, -1)
+  BoulevardPilsner = model.Drink(109, "Pilsner", 4.8, 2, 30, -1,-1)
+  BoulevardWide = model.Drink(110, "Single-Wide IPA", 5.7, 2, 5, -1,-1)
+  BoulevardFarmhouse = model.Drink(111, "Tank 7 Farmhouse Ale", 8, 2, 18, -1,-1)
+  BoulevardSixth = model.Drink(112, "The Sixth Glass", 10.5, 2, 11, -1, -1)
+  BoulevardZon = model.Drink(113, "ZON belgian-style Witbier", 4.4, 2, 24, -1, -1)
+  SamBoston = model.Drink(114, "Boston Lager", 4.9, 40, 25, -1, -1)
+  SamDunkel = model.Drink(115, "Dunkelweizen", 5.1, 40, 21, -1, -1)
+  SamPorter = model.Drink(116, "Holiday Porter", 5.8, 40, 15,-1,-1)
+  SamPils = model.Drink(117, "Noble Pils", 4.9, 40, 30, -1,-1)
+  SamMarzen = model.Drink(118, "Octoberfest", 5.3, 40, 28, -1,-1)
+  SamSummerAle = model.Drink(119, "Summer Ale", 5.3, 40, 1, -1,-1)
+  SamWhiteAle = model.Drink(120, "White Ale", 5.3, 40, 24, -1,-1)
+  SamKolsch = model.Drink(121, "East West Kolsch", 5.0, 40, 15, -1,-1)
+  SamSaison = model.Drink(122, "Rustic Saison", 4.4, 40, 18, -1,-1)
+  SamCoastal = model.Drink(123, "Coastal Wheat", 5.4, 40, 22, -1, -1)
+  SamPale = model.Drink(124, "Pale Ale" , 5.4, 40, 4, -1,-1)
+  SamScotch = model.Drink(125, "Scotch Ale", 5.5, 40, 19, -1,-1)
+  SamBock = model.Drink(126, "Double Bock", 9.5, 40, 25, -1,-1)
+  StonePale = model.Drink(127, "Pale Ale", 5.4, 41, 4, -1,-1)
+  StonePorter = model.Drink(128, "Smoked Porter", 5.9, 41, 15, -1,-1)
+  StoneIPA = model.Drink(129, "IPA", 6.9, 41, 5, -1, -1)
+  StoneBarleyWine = model.Drink(130, "Old Guardian Barley Wine", 12, 41, 8,-1,-1)
+  NewSunshine = model.Drink(131, "Sunshine Wheat Beer", 4.8, 42, 1, -1,-1)
+  NewFat = model.Drink(132, "Fat Tire", 5.2,42, 3, -1,-1)
+  NewBlue = model.Drink(133, "Blue Paddle", 4.8, 42, 30, -1,-1)
+  NewTrippel = model.Drink(134, "Trippel", 7.8, 42, 14, -1,-1)
+  NewRanger = model.Drink(135, "Ranger", 6.5, 42, 5, -1,-1)
+  NewBelgo = model.Drink(136, "Belgo", 7.0, 42,5, -1,-1)
+  NewMother = model.Drink(137, "Mothership Wit", 4.8, 42,24, -1,-1) 
+  RougeAmber = model.Drink(138, "American Amber Ale", 5.6, 43, 3, -1,-1)
+  RougeBlack = model.Drink(139, "Chatoe Rogue First Growth Dirtoir Black Lager", 6.0, 43, 31, -1,-1)
+  RougeSingle = model.Drink(140, "Single Malt Ale", 5.3, 43, 9, -1, -1)
+  RougeDead = model.Drink(141, "Dead Guy Ale", 6.5, 43, 27, -1,-1)
+  RougeFestive = model.Drink(142, "Festive Ale", 6.2, 43, 18, -1,-1)
+  RougeQuad = model.Drink(143, "Issaqah Quad Frog", 13.5, 43, 11, -1, -1)
+  RougeMarzen = model.Drink(144, "Maierfest Lager", 5.6, 43, 28, -1,-1)
+  RougeBlack = model.Drink(145, "Rouge Black Brutal", 9, 43, 31, -1,-1)
+  RougeWine = model.Drink(146, "XS Old Crustacean", 11.5, 43, 8,-1,-1)
+  KuhnEis = model.Drink(147, "Eisbock", 13, 44, 26, -1,-1)
+    
   TallgrassHalcyon = model.Drink(1,"Halcyon", 5, 1,1,-1,-1)
   TallgrassAle = model.Drink(2,"Tallgrass Ale", 4.4, 1,7,-1,-1)
   TallgrassOasis = model.Drink(3, "Oasis", 7.2, 1, 2, -1,-1)
   BoulevardAmberAle = model.Drink(4, "Amber Ale", 5.1, 2,3,-1,-1)
   BoulevardPaleAle = model.Drink(5,"Pale Ale", 5.4, 2, 4, -1,-1)
-
-  # Liquor
   TheKrackenBlackSpicedRum = model.Drink(6, "The Kracken Black Spiced Rum", 47, 3,-1,1,-1)
   JamesonIrishWhiskey = model.Drink(7, "Jameson Irish Whiskey", 40, 5,-1,6,-1)
   WildTurkeyBourbon = model.Drink(8, "Wild Turkey", 50.5, 5, -1,3,-1 )
-  BacardiSuperior = model.Drink(9, "Bacardi Superior", 40, 12, -1,2,-1)
-  McCormickVodka = model.Drink(10, "McCormick Vodka", 40, 8, -1, 7, -1)
+  BacardiSuperior = model.Drink(9, "Bacardi Superior", 40, -1, -1,2,-1)#add manu
+  McCormickVodka = model.Drink(10, "McCormick Vodka", 40, -1, -1, 7, -1)#add manu
+  RelaxRiesling = model.Drink(11, "Relax Riesling", 9.5, -1, -1,-1, 1)#add manu
+  HobnobPinotNoir = model.Drink(12, "Hobnob Pinot Noir", 13, -1, -1,-1,3)#add manu
+  YellowTailChardonnay = model.Drink(13, "Yellow Tail Chardonnay", 13.5, -1, -1,-1,2)#add manu
+  FranziaMerlot = model.Drink(14, "Franzia Merlot", 8.8, -1, -1,-1,4)#add manu
+  MontelenaEstateCabernetSauvignon = model.Drink(15, "Montelena Estate Cabernet Sauvignon", 14.3, -1, -1, -1 , 5)#add manu
 
-  # Wine
-  RelaxRiesling = model.Drink(11, "Relax Riesling", 9.5, 13, -1,-1, 1)
-  HobnobPinotNoir = model.Drink(12, "Hobnob Pinot Noir", 13, 9, -1,-1,3)
-  YellowTailChardonnay = model.Drink(13, "Yellow Tail Chardonnay", 13.5, 10, -1,-1,2)
-  FranziaMerlot = model.Drink(14, "Franzia Merlot", 8.8, 11, -1,-1,4)
-  MontelenaEstateCabernetSauvignon = model.Drink(15, "Montelena Estate Cabernet Sauvignon", 14.3, -1, -1, -1 , 5)
-
-  Budweiser = model.Drink(16, "Budweiser", 5.5, 6, 8, -1, -1)
-  Foothills = model.Drink(17, "Foothills Baltic Porter", 9, 7, 9, -1, -1)
-
-  # beer
+  model.DBSession.add(TallgrassBuffaloSweat)
+  model.DBSession.add(TallgrassIPA)
+  model.DBSession.add(BoulevardBob)
+  model.DBSession.add(BoulevardBoss)
+  model.DBSession.add(BoulevardBully)
+  model.DBSession.add(BoulevardTruth)
+  model.DBSession.add(BoulevardIPA)
+  model.DBSession.add(BoulevardDry)
+  model.DBSession.add(BoulevardTripel)
+  model.DBSession.add(BoulevardPilsner)
+  model.DBSession.add(BoulevardWide)
+  model.DBSession.add(BoulevardFarmhouse)
+  model.DBSession.add(BoulevardSixth)
+  model.DBSession.add(BoulevardZon)
+  model.DBSession.add(SamBoston)
+  model.DBSession.add(SamDunkel)
+  model.DBSession.add(SamPorter)
+  model.DBSession.add(SamPils)
+  model.DBSession.add(SamMarzen)
+  model.DBSession.add(SamSummerAle)
+  model.DBSession.add(SamWhiteAle)
+  model.DBSession.add(SamKolsch)
+  model.DBSession.add(SamSaison)
+  model.DBSession.add(SamCoastal)
+  model.DBSession.add(SamPale)
+  model.DBSession.add(SamScotch)
+  model.DBSession.add(SamBock)
+  model.DBSession.add(StonePale)
+  model.DBSession.add(StonePorter)
+  model.DBSession.add(StoneIPA)
+  model.DBSession.add(StoneBarleyWine)
+  model.DBSession.add(NewSunshine)
+  model.DBSession.add(NewFat)
+  model.DBSession.add(NewBlue)
+  model.DBSession.add(NewTrippel)
+  model.DBSession.add(NewRanger)
+  model.DBSession.add(NewBelgo)
+  model.DBSession.add(NewMother)
+  model.DBSession.add(RougeAmber)
+  model.DBSession.add(RougeBlack)
+  model.DBSession.add(RougeSingle)
+  model.DBSession.add(RougeDead)
+  model.DBSession.add(RougeFestive)
+  model.DBSession.add(RougeQuad)
+  model.DBSession.add(RougeMarzen)
+  model.DBSession.add(RougeBlack)
+  model.DBSession.add(RougeWine)
+  model.DBSession.add(KuhnEis)
+  
   model.DBSession.add(TallgrassHalcyon)
   model.DBSession.add(TallgrassAle)
   model.DBSession.add(TallgrassOasis)
   model.DBSession.add(BoulevardAmberAle)
   model.DBSession.add(BoulevardPaleAle)
-
-  model.DBSession.add(Budweiser)
-  model.DBSession.add(Foothills)
-
-  # liquor
   model.DBSession.add(TheKrackenBlackSpicedRum)
   model.DBSession.add(JamesonIrishWhiskey)
   model.DBSession.add(WildTurkeyBourbon)
   model.DBSession.add(BacardiSuperior)
   model.DBSession.add(McCormickVodka)
-
-  # wine
   model.DBSession.add(RelaxRiesling)
   model.DBSession.add(HobnobPinotNoir)
   model.DBSession.add(YellowTailChardonnay)
   model.DBSession.add(FranziaMerlot)
   model.DBSession.add(MontelenaEstateCabernetSauvignon)
 
+  NineWalksSauvignonBlanc = model.Drink(51, "Nine Walks Sauvignon Blanc", 13.4, 10, -1, -1 , 6)
+  JoshCellarsChardonnay = model.Drink(52, "Josh Cellars Chardonnay", 12.5, 10, -1, -1 , 2)
+  FranziaZinfandel = model.Drink(53, "Franzia Zinfandel", 8, 11, -1, -1 , 7)
+  FranziaCabernetSauvignon = model.Drink(54, "Franzia Cabernet Sauvignon", 8, 11, -1, -1 , 5)
+  BlueRieslingAuslese = model.Drink(55, "Blue Riesling Auslese", 8.5, 13, -1, -1 , 1)
+  BereichBingenAuslese = model.Drink(56, "Bereich Bingen Auslese", 10.5, 13, -1, -1 , 1)
+  YellowTailCabernetSauvignon = model.Drink(57, "Yellow Tail Cabernet Sauvignon", 13.5, 10, -1,-1, 5)
+  YellowTailMerlot = model.Drink(58, "Yellow Tail Merlot", 11, 10, -1,-1, 4)
+  YellowTailPinotGrigio = model.Drink(59, "Yellow Tail Pinot-Grigio", 11.5, 10, -1,-1, 8)
+  YellowTailPinotNoir = model.Drink(60, "Yellow Tail Pinot Noir", 13.5, 10, -1,-1, 3)
+  YellowTailRiesling = model.Drink(61, "Yellow Tail Riesling", 12.5, 10, -1,-1, 1)
+  YellowTailShiraz = model.Drink(62, "Yellow Tail Shiraz", 13.5, 10, -1,-1, 9)
+  BaroneFiniMerlot = model.Drink(63, "Barone Fini Merlot", 14, 10, -1,-1, 4)
+  BaroneFiniPinotGrigio = model.Drink(64, "Barone Fini Pinot Grigio", 12.5, 10, -1,-1, 4)
+  GirardSauvignonBlac = model.Drink(65, "Girard Sauvignon Blac", 13.9, 10, -1,-1, 6)
+  GirardCabernetSauvignon = model.Drink(66, "Girard Cabernet Sauvignon", 14.5, 10, -1,-1, 5)
+  GirardChardonnay = model.Drink(67, "Girard Chardonnay", 13.9, 10, -1,-1, 2)
+  GirardOldVineZinfandel = model.Drink(68, "Girard Old Vine Zinfandel", 14.7, 10, -1,-1, 7)
+  KundeFamilyEstateCabernetSauvignon = model.Drink(69, "Kunde Family Estate Cabernet Sauvignon", 13.8, 10, -1,-1, 5)
+  KundeFamilyEstateChardonnay = model.Drink(70, "Kunde Family Estate Chardonnay", 13.8, 10, -1,-1, 2)
+  KundeFamilyEstateMerlot = model.Drink(71, "Kunde Family Estate Merlot", 13.8, 10, -1,-1, 4)
+  PatchBlockMerlot = model.Drink(72, "Patch Block Merlot", 14.5, 10, -1,-1, 4)
+  PatchBlockCabernetSauvignon = model.Drink(73, "Patch Block Cabernet Sauvignon", 14.5, 10, -1,-1, 5)
+  PatchBlockChardonnay = model.Drink(74, "Patch Block Chardonnay", 12.5, 10, -1,-1, 2)
+  PatchBlockPinotNoir = model.Drink(75, "Patch Block Pinot Noir", 14.9, 10, -1,-1, 3)
+  PatchBlockSauvignonBlac = model.Drink(76, "Patch Block Sauvignon Blac", 12.5, 10, -1,-1, 6)
+  FranziaChardonnay = model.Drink(77, "Franzia Chardonnay", 12, 11, -1, -1 , 2)
+  FranziaShiraz = model.Drink(78, "Franzia Shiraz", 8, 11, -1, -1 , 9)
+  NapaValleyChardonnay = model.Drink(79, "Napa Valley Chardonnay", 13.6, 14, -1,-1, 2)
+  NapaValleyCabernetSauvignon = model.Drink(80, "Napa Valley Cabernet Sauvignon", 14.2, 14, -1,-1, 5)
+  MontelenaEstateZinfandel = model.Drink(81, "Montelena Estate Zinfandel", 14.7, 14, -1,-1, 7)
+  PotterValleyRiesling = model.Drink(82, "Potter Valley Riesling", 14.4, 14, -1,-1, 1)
+  BlueRieslingKabinett = model.Drink(83, "Blue Riesling Kabinett", 7.5, 13, -1, -1 , 1)
+  BlueRiesling = model.Drink(84, "Blue Riesling", 9, 13, -1, -1 , 1)
+  PiesporterMichelsberg = model.Drink(85, "Piesporter Michelsberg", 9, 13, -1, -1 , 1)
+  PiesporterMichelsbergKabinett = model.Drink(86, "Piesporter Michelsberg Kabinett", 8, 13, -1, -1 , 1)
+  PiesporterMichelsbergAuslese = model.Drink(87, "Piesporter Michelsberg Auslese", 8, 13, -1, -1 , 1)
+  BereichBernkastel = model.Drink(88, "Bereich Bernkastel", 8.5, 13, -1, -1 , 1)
+  ZellerSchwarzeKatz = model.Drink(89, "Zeller Schwarze Katz", 9, 13, -1, -1 , 1)
+  MoselGoldRiesling = model.Drink(90, "MoselGoldRiesling", 9, 13, -1, -1 , 1)
+  SchmittSoehneRiesling = model.Drink(91, "Schmitt Soehne Riesling", 9, 13, -1, -1 , 1)
+  SchmittSoehnePinotGrigio = model.Drink(92, "Schmitt Soehne Pinot Grigio", 9, 13, -1, -1 , 3)
+
+# wine
+  model.DBSession.add(NineWalksSauvignonBlanc)
+  model.DBSession.add(JoshCellarsChardonnay)
+  model.DBSession.add(FranziaZinfandel)
+  model.DBSession.add(FranziaCabernetSauvignon)
+  model.DBSession.add(BlueRieslingAuslese)
+  model.DBSession.add(BereichBingenAuslese)
+  model.DBSession.add(YellowTailCabernetSauvignon)
+  model.DBSession.add(YellowTailMerlot)
+  model.DBSession.add(YellowTailPinotGrigio)
+  model.DBSession.add(YellowTailPinotNoir)
+  model.DBSession.add(YellowTailRiesling)
+  model.DBSession.add(YellowTailShiraz)
+  model.DBSession.add(BaroneFiniMerlot)
+  model.DBSession.add(BaroneFiniPinotGrigio)
+  model.DBSession.add(GirardSauvignonBlac)
+  model.DBSession.add(GirardCabernetSauvignon)
+  model.DBSession.add(GirardChardonnay)
+  model.DBSession.add(GirardOldVineZinfandel)
+  model.DBSession.add(KundeFamilyEstateCabernetSauvignon)
+  model.DBSession.add(KundeFamilyEstateChardonnay)
+  model.DBSession.add(KundeFamilyEstateMerlot)
+  model.DBSession.add(PatchBlockMerlot)
+  model.DBSession.add(PatchBlockCabernetSauvignon)
+  model.DBSession.add(PatchBlockChardonnay)
+  model.DBSession.add(PatchBlockPinotNoir)
+  model.DBSession.add(PatchBlockSauvignonBlac)
+  model.DBSession.add(PotterValleyRiesling)
+  model.DBSession.add(FranziaChardonnay)
+  model.DBSession.add(FranziaShiraz)
+  model.DBSession.add(NapaValleyChardonnay)
+  model.DBSession.add(NapaValleyCabernetSauvignon)
+  model.DBSession.add(MontelenaEstateZinfandel)
+  model.DBSession.add(PotterValleyRiesling)
+  model.DBSession.add(BlueRieslingKabinett)
+  model.DBSession.add(BlueRiesling)
+  model.DBSession.add(PiesporterMichelsberg)
+  model.DBSession.add(PiesporterMichelsbergKabinett)
+  model.DBSession.add(PiesporterMichelsbergAuslese)
+  model.DBSession.add(BereichBernkastel)
+  model.DBSession.add(ZellerSchwarzeKatz)
+  model.DBSession.add(MoselGoldRiesling)
+  model.DBSession.add(SchmittSoehneRiesling)
+  model.DBSession.add(SchmittSoehnePinotGrigio)
+
   transaction.commit()
   print "successfully setup"
+
