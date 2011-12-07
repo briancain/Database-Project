@@ -9,21 +9,33 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
   <title>Derp.</title>
+  <script type="text/javascript" src="javascript/jquery-1.5.1.min.js"></script>
+  <script type="text/javascript" src="javascript/jquery-ui-1.8.10.custom.min_.js"></script>
+  <script type="text/javascript" src="javascript/accordionImageMenu-0.4.min_.js"></script>
+  <link rel="stylesheet" href="css/accordionImageMenu.css" type="text/css" />
+  <script type="text/javascript">
+  $(document).ready(function() {
+	$('#menu').AccordionImageMenu({
+	  'openDim': 320,
+	  'closeDim': 180,
+          'height':300,
+	});
+  });
+  </script>
+
+
 </head>
 
 <body>
+  <ul id='menu'>
+     <li><a href='link1'><span>Wine</span><img src="images/wine.jpg" /></a></li>
+     <li><a href='link2'><span>Beer</span><img src="images/ba_glassware02.jpg" /></a></li>
+     <li><a href='link3'><span>Liquor</span><img src="images/liquor.jpg" /></a></li>
+     <li><a href='link4'><span>Food</span><img src="images/steak.bmp" /></a></li>
+     <li><a href='link5'><span>Regions</span><img src="images/Earth.jpg" /></a></li>
+  </ul>
   <div id="derp">
-    <h2>Derp.</h2>
-    <p>Derp herp. Herp derp.</p>
-    <ol id="getting_started_steps">
-      
-      <li class="Herp Derp">
-        <h3>Banana banana banana</h3>
-        <p> banana banana banana </p>
       ${tmpl_context.grid()}
-      </li>
-     
-    </ol>
   </div>
 </body>
 </html>

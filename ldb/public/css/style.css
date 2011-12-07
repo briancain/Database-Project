@@ -179,6 +179,22 @@ form.loginfields input.text
     color: #fff;
 }
 
+form.loginfields #loginremember
+{
+    float:right;
+    vertical-align: middle;
+    height: 26px;
+}
+
+form.loginfields #labelremember 
+{
+    float: right;
+    width: auto;
+    margin:0;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
 form.loginfields input#submit
 {
     background: url('../images/loginbottombg.png') bottom left no-repeat;
@@ -203,7 +219,6 @@ form.loginfields input#submit
   margin: 0.5em;
   margin-left: 1.5em;
   padding: 1em;
-  float: right;
   width: 200px;
   font-size: 88%;
 }
@@ -218,13 +233,23 @@ form.loginfields input#submit
   padding-left: 0;
 }
 
+#sb_booze {
+  float: left;
+  clear: left;
+}
 
+#sb_booze_more {
+  float: left;
+  clear: left;
+}
 
 #sb_top {
+  float: right;
   clear: right;
 }
 
 #sb_bottom {
+  float: right;
   clear: right;
 }
 
