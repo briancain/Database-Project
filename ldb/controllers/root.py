@@ -143,6 +143,92 @@ class RootController(BaseController):
         return dict(page = 'derp',
                     beers = beers, )
 
+
+    @expose('ldb.templates.wine')
+    def wine(self):
+        colModel = [
+            {'display':'ID', 'name':'id', 'width':20, 'align':'center'},
+            {'display':'Category', 'name':'category', 'width':140, 'align':'left'},
+            {'display':'Style', 'name':'style', 'width':140, 'align':'left'},
+            {'display':'About', 'name':'about', 'width':220, 'align':'center'},
+            {'display':'Color', 'name':'color', 'width':120, 'align':'center'}
+        ]
+        searchitems = [
+            {'display':'ID', 'name':'id', 'isdefault':True},
+            {'display':'Category', 'name':'category'},
+            {'display':'Style', 'name':'style'}
+        ]
+        grid = FlexiGrid(id='flex', fetchURL='fetchW', title='Wine',
+            colModel=colModel, useRp=True, rp=10,
+            sortname='id', sortorder='asc', usepager=True,
+            searchitems=searchitems,
+            showTableToggleButton=True,
+       #    buttons=buttons,
+            width=700,
+            height=200
+        )
+        pylons.tmpl_context.grid = grid
+        wines = DBSession.query( Wine ).order_by( Wine.id )
+        return dict(page = 'wine',
+                    wines = wines, )
+
+
+    @expose('ldb.templates.beer')
+    def beer(self):
+        colModel = [
+            {'display':'ID', 'name':'id', 'width':20, 'align':'center'},
+            {'display':'Category', 'name':'category', 'width':140, 'align':'left'},
+            {'display':'Style', 'name':'style', 'width':140, 'align':'left'},
+            {'display':'About', 'name':'about', 'width':220, 'align':'center'},
+            {'display':'Color', 'name':'color', 'width':120, 'align':'center'}
+        ]
+        searchitems = [
+            {'display':'ID', 'name':'id', 'isdefault':True},
+            {'display':'Category', 'name':'category'},
+            {'display':'Style', 'name':'style'}
+        ]
+        grid = FlexiGrid(id='flex', fetchURL='fetch', title='Beer',
+            colModel=colModel, useRp=True, rp=10,
+            sortname='id', sortorder='asc', usepager=True,
+            searchitems=searchitems,
+            showTableToggleButton=True,
+       #    buttons=buttons,
+            width=700,
+            height=200
+        )
+        pylons.tmpl_context.grid = grid
+        beers = DBSession.query( Beer ).order_by( Beer.id )
+        return dict(page = 'beer',
+                    beers = beers, )
+
+    
+    @expose('ldb.templates.liquor')
+    def liquor(self):
+        colModel = [
+            {'display':'ID', 'name':'id', 'width':20, 'align':'center'},
+            {'display':'Category', 'name':'category', 'width':140, 'align':'left'},
+            {'display':'Style', 'name':'style', 'width':140, 'align':'left'},
+            {'display':'About', 'name':'about', 'width':220, 'align':'center'},
+            {'display':'Color', 'name':'color', 'width':120, 'align':'center'}
+        ]
+        searchitems = [
+            {'display':'ID', 'name':'id', 'isdefault':True},
+            {'display':'Category', 'name':'category'},
+            {'display':'Style', 'name':'style'}
+        ]
+        grid = FlexiGrid(id='flex', fetchURL='fetchL', title='Liquor',
+            colModel=colModel, useRp=True, rp=10,
+            sortname='id', sortorder='asc', usepager=True,
+            searchitems=searchitems,
+            showTableToggleButton=True,
+       #    buttons=buttons,
+            width=700,
+            height=200
+        )
+        pylons.tmpl_context.grid = grid
+        liquors = DBSession.query( Liquor ).order_by( Liquor.id )
+        return dict(page = 'liquor',
+                    liquors = liquors, )
     @expose('json')
     #@validate(validators={"page":validators.Int(), "rp":validators.Int()})
     def fetch(self, page=1, rp=25, sortname='id', sortorder='asc', qtype=None, query=None): 
@@ -162,4 +248,47 @@ class RootController(BaseController):
         #beers = beers.order_by(getattr(column,sortorder)()).offset(offset).limit(rp)
         rows = [{'id'  : beer.id,
                  'cell': [beer.id, beer.category, beer.style, beer.about, beer.color]} for beer in beers]
+        return dict(page=page, total=total, rows=rows)
+
+    @expose('json')
+    #@validate(validators={"page":validators.Int(), "rp":validators.Int()})
+    def fetchW(self, page=1, rp=25, sortname='id', sortorder='asc', qtype=None, query=None): 
+        try: 
+            offset = (int(page)-1) * int(rp) 
+        except: 
+            page = 1 
+            rp=25 
+            offset = (int(page)-1) * int(rp)
+        if (query):
+            #d = {qtype:query}
+            wines = DBSession.query(Wine)
+        else:
+            wines = DBSession.query(Wine)
+        total = wines.count()
+        column = getattr(Wine, sortname)
+        #beers = beers.order_by(getattr(column,sortorder)()).offset(offset).limit(rp)
+        rows = [{'id'  : wine.id,
+                 'cell': [wine.id, wine.category, wine.style, wine.about, wine.color]} for wine in wines]
+        return dict(page=page, total=total, rows=rows)
+
+
+    @expose('json')
+    #@validate(validators={"page":validators.Int(), "rp":validators.Int()})
+    def fetchL(self, page=1, rp=25, sortname='id', sortorder='asc', qtype=None, query=None): 
+        try: 
+            offset = (int(page)-1) * int(rp) 
+        except: 
+            page = 1 
+            rp=25 
+            offset = (int(page)-1) * int(rp)
+        if (query):
+            #d = {qtype:query}
+            liquors = DBSession.query(Liquor)
+        else:
+            liquors = DBSession.query(Liquor)
+        total = liquors.count()
+        column = getattr(Liquor, sortname)
+        #beers = beers.order_by(getattr(column,sortorder)()).offset(offset).limit(rp)
+        rows = [{'id'  : liquor.id,
+                 'cell': [liquor.id, liquor.category, liquor.style, liquor.about, liquor.color]} for liquor in liquors]
         return dict(page=page, total=total, rows=rows)
