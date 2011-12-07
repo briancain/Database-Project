@@ -16,6 +16,8 @@ from ldb.controllers.secure import SecureController
 from tw.jquery import FlexiGrid
 from tw.api import js_callback
 
+from tg import tmpl_context
+from ldb.widgets.beer_form import create_beer_form
 
 from ldb.model.data import Beer
 
@@ -174,7 +176,7 @@ class RootController(BaseController):
 
 
     @expose('ldb.templates.beer')
-    def beer(self):
+    def beer(self, **kw):
         colModel = [
             {'display':'ID', 'name':'id', 'width':20, 'align':'center'},
             {'display':'Category', 'name':'category', 'width':140, 'align':'left'},
@@ -197,9 +199,10 @@ class RootController(BaseController):
             height=200
         )
         pylons.tmpl_context.grid = grid
+        tmpl_context.form = create_beer_form
         beers = DBSession.query( Beer ).order_by( Beer.id )
         return dict(page = 'beer',
-                    beers = beers, )
+                    beers = beers, modelname='Beer', value=kw, )
 
     
     @expose('ldb.templates.liquor')
@@ -292,3 +295,9 @@ class RootController(BaseController):
         rows = [{'id'  : liquor.id,
                  'cell': [liquor.id, liquor.category, liquor.style, liquor.about, liquor.color]} for liquor in liquors]
         return dict(page=page, total=total, rows=rows)
+
+    @expose('ldb.templates.new_form')
+    def new(self, **kw):
+        """Show form to add new movie data record."""
+        tmpl_context.form = create_beer_form
+        return dict(modelname='Beer', value=kw)
