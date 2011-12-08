@@ -25,30 +25,66 @@
     };
     var map = new google.maps.Map(document.getElementById("map_canvas"),
         myOptions);
+var contentString = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h2 id="firstHeading" class="firstHeading">Tallgrass Brewing Co</h2>'+
+    '<div id="bodyContent">'+
+    '<p><b>Tallgrass Brewing Co.</b>, Tallgrass Brewing Co. is a microbrewery based out of Manhattan, Kansas.</p>'+
+    '<p><a href="http://www.tallgrassbeer.com/">http://www.tallgrassbeer.com/</a></p>' +
+    '</div>'+
+    '</div>';
+
+var infowindow = new google.maps.InfoWindow({
+    content: contentString
+}); 
     var address = "8845 Quail Lane Manhattan, KS 66502";
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({
             map: map,
-            position: results[0].geometry.location
+            position: results[0].geometry.location,
+            title: "Tallgrass Brewing Co."
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
         });
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
+    
 var address2 = "333 Washington St. Jersey City, NJ 07302";
+var contentString2 = '<div id="content2">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h2 id="firstHeading" class="firstHeading">Boulevard Brewing Co.</h2>'+
+    '<div id="bodyContent">'+
+    '<p><b>Boulevard Brewing Co.</b>, Boulevard Brewing Co. is a microbrewery based out of Kansas City, Missouri.</p>'+
+    '<p><a href="http://www.boulevard.com/">http://www.boulevard.com/</a></p>' +
+    '</div>'+
+    '</div>';
+
+var infowindow2 = new google.maps.InfoWindow({
+    content: contentString2
+}); 
     geocoder.geocode( { 'address': address2}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
         var marker2 = new google.maps.Marker({
             map: map,
-            position: results[0].geometry.location
+            position: results[0].geometry.location,
+            title: "Boulevard Brewing Co."
+        });
+        google.maps.event.addListener(marker2, 'click', function() {
+          infowindow2.open(map,marker2);
         });
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
+   
 var address3 = "777 Westchester Ave. West Harrison , NY 10604";
     geocoder.geocode( { 'address': address3}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
