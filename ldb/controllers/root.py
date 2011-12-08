@@ -206,7 +206,7 @@ class RootController(BaseController):
     @expose('ldb.templates.food')
     def food(self, **kw):
         food_wine_grid = DataGrid(fields=[('Wine Name', 'Drink.name'), ('Category', 'Wine.category'), ('ABV', 'Drink.abv'),
-          ('Color', 'Wine.color'), ('Grapes', 'Wine.grapes'), ('Food Name', 'Food.name')])
+          ('Grapes', 'Wine.grapes'), ('Food Name', 'Food.name')])
         food_beer_grid = DataGrid(fields=[('Beer Name','Drink.name'), ('Category', 'Beer.category'), ('Style', 'Beer.style'), ('ABV', 'Drink.abv'), ('Food Name', 'Food.name')])
         tmpl_context.form = create_food_form
         
