@@ -20,7 +20,9 @@ from tg import tmpl_context
 from ldb.widgets.beer_form import create_beer_form
 from ldb.widgets.liquor_form import create_liquor_form
 from ldb.widgets.wine_form import create_wine_form
+from ldb.widgets.food_form import create_food_form
 
+from sqlalchemy import distinct
 
 from ldb.model.data import Beer
 
@@ -199,6 +201,34 @@ class RootController(BaseController):
         #beers = getattr(DBSession, bUrl)()
         beers = eval('DBSession.' + bUrl)
         return dict(page = 'beer', grid = beer_grid, beers = beers, modelname = 'Beer', value = kw )
+
+
+    @expose('ldb.templates.food')
+    def food(self, **kw):
+        food_wine_grid = DataGrid(fields=[('Wine Name', 'Drink.name'), ('Category', 'Wine.category'), ('ABV', 'Drink.abv'),
+          ('Color', 'Wine.color'), ('Grapes', 'Wine.grapes'), ('Food Name', 'Food.name')])
+        food_beer_grid = DataGrid(fields=[('Beer Name','Drink.name'), ('Category', 'Beer.category'), ('Style', 'Beer.style'), ('ABV', 'Drink.abv'), ('Food Name', 'Food.name')])
+        tmpl_context.form = create_food_form
+        
+        fUrl = 'query(Food, Drink, Wine).filter(Wine.id == Drink.catW_id).filter(Food.catW_id == Drink.catW_id)'
+        fbUrl = 'query(Food, Drink, Beer).filter(Beer.id == Drink.catB_id).filter(Food.catB_id == Drink.catB_id)'
+
+        if kw:
+            name = kw['name']
+            if name:
+                fUrl = fUrl + '.filter(Food.name == \''+ name + '\')'
+                fbUrl = fbUrl + '.filter(Food.name == \''+ name + '\')'
+
+        #beers = getattr(DBSession, bUrl)()
+        wines = eval('DBSession.' + fUrl)
+        beers = eval('DBSession.' + fbUrl)
+        return dict(page = 'food', grid = food_wine_grid, gridbeer = food_beer_grid, wines = wines, beers = beers, modelname = 'Food', value = kw )
+
+    @expose()
+    def foodQ(self, **kw):
+        """Query from the from on the food page"""
+        name = kw['name']
+        redirect('./food?name='+name)
 
     @expose()
     def beerQ(self, **kw):

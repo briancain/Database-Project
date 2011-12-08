@@ -252,7 +252,7 @@ def setup_app(command, conf, vars):
   Chardonnay = model.Wine(2,"White", "Chardonnay", "NA", "White", "Chardonnay")
   PinotNoir = model.Wine(3,"Red", "Pinot Noir", "NA", "Red", "Pinot Noir")
   Merlot = model.Wine(4, "Red", "Merlot", "NA", "Red", "Merlot")
-  CabernetSauvignon = model.Wine(5, "Red", "Cabernet Sauvignon", "NA", "Red", "NA")
+  CabernetSauvignon = model.Wine(5, "Red", "Cabernet Sauvignon", "NA", "Red", "Cabernet Sauvignon")
 
   SauvignonBlac = model.Wine(6, "White", "Sauvignon Blanc", "NA", "White", "Sauvignon Blac")
   Zinfandel = model.Wine(7, "Red", "Zinfandel", "NA", "Red", "Zinfandel")
