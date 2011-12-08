@@ -18,8 +18,13 @@ from tw.api import js_callback
 
 from tg import tmpl_context
 from ldb.widgets.beer_form import create_beer_form
+from ldb.widgets.liquor_form import create_liquor_form
+from ldb.widgets.wine_form import create_wine_form
+
 
 from ldb.model.data import Beer
+
+from tw.forms import DataGrid
 
 __all__ = ['RootController']
 
@@ -119,201 +124,143 @@ class RootController(BaseController):
 
     @expose('ldb.templates.derp')
     def derp(self):
-        colModel = [
-            {'display':'ID', 'name':'id', 'width':20, 'align':'center'},
-            {'display':'Category', 'name':'category', 'width':140, 'align':'left'},
-            {'display':'Style', 'name':'style', 'width':140, 'align':'left'},
-            {'display':'About', 'name':'about', 'width':220, 'align':'center'},
-            {'display':'Color', 'name':'color', 'width':120, 'align':'center'}
-        ]
-        searchitems = [
-            {'display':'ID', 'name':'id', 'isdefault':True},
-            {'display':'Category', 'name':'category'},
-            {'display':'Style', 'name':'style'}
-        ]
-        grid = FlexiGrid(id='flex', fetchURL='fetch', title='Beer',
-            colModel=colModel, useRp=True, rp=10,
-            sortname='id', sortorder='asc', usepager=True,
-            searchitems=searchitems,
-            showTableToggleButton=True,
-       #    buttons=buttons,
-            width=700,
-            height=200
-        )
-        pylons.tmpl_context.grid = grid
-        beers = DBSession.query( Beer ).order_by( Beer.id )
-        return dict(page = 'derp',
-                    beers = beers, )
+        return dict(page = 'derp', )
 
-
+        
     @expose('ldb.templates.wine')
-    def wine(self):
-        colModel = [
-            {'display':'Name', 'name':'name', 'width':180, 'align':'center'},
-            {'display':'Category', 'name':'category', 'width':60, 'align':'left'},
-            {'display':'Style', 'name':'style', 'width':140, 'align':'left'},
-            {'display':'ABV', 'name':'about', 'width':40, 'align':'center'},
-            {'display':'Color', 'name':'color', 'width':120, 'align':'center'},
-            {'display':'Brewer', 'name':'brewer', 'width':120, 'align':'center'},
-            {'display':'Region', 'name':'region', 'width':120, 'align':'center'}
-        ]
-        searchitems = [
-            {'display':'ID', 'name':'id', 'isdefault':True},
-            {'display':'Category', 'name':'category'},
-            {'display':'Style', 'name':'style'}
-        ]
-        grid = FlexiGrid(id='flex', fetchURL='fetchW', title='Wine',
-            colModel=colModel, useRp=True, rp=10,
-            sortname='id', sortorder='asc', usepager=True,
-            searchitems=searchitems,
-            showTableToggleButton=True,
-       #    buttons=buttons,
-            width=881,
-            height=200
-        )
-        pylons.tmpl_context.grid = grid
-        wines = DBSession.query( Wine ).order_by( Wine.id )
-        return dict(page = 'wine',
-                    wines = wines, )
-
-
+    def wine(self, **kw):
+        wine_grid = DataGrid(fields=[('Name','Drink.name'), ('Category', 'Wine.category'), ('Style', 'Wine.style'), ('ABV', 'Drink.abv'), ('Color', 'Wine.color'), ('Brewer', 'Manufacturer.name'), ('Region', 'Region.state')])
+        tmpl_context.form = create_wine_form
+        
+        bUrl = 'query(Wine, Drink, Manufacturer, Region).filter(Wine.id == Drink.catW_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)'
+        if kw:
+            name = kw['name']
+            if name:
+                bUrl = bUrl + '.filter(Drink.name == \''+ name + '\')'
+            category = kw['category']
+            if category:
+                bUrl = bUrl + '.filter(Wine.category == \''+ category + '\')'        
+            style = kw['style']
+            if style:
+                bUrl = bUrl + '.filter(Wine.style == \''+ style + '\')'        
+            abv = kw['abv']
+            if abv:
+                bUrl = bUrl + '.filter(Drink.abv == \''+ abv + '\')' #may need to be converted to a double!!!
+            color = kw['color']
+            if color:
+                bUrl = bUrl + '.filter(Wine.color == \''+ color + '\')'
+            brewer = kw['brewer']
+            if brewer:
+                bUrl = bUrl + '.filter(Manufacturer.name == \''+ brewer + '\')'    
+            region = kw['region']
+            if region:
+                bUrl = bUrl + '.filter(Region.state == \''+ region + '\')'
+        wines = eval('DBSession.' + bUrl)
+        return dict(page = 'wine', grid = wine_grid, wines = wines, modelname = 'Wine', value = kw )
+    
     @expose('ldb.templates.beer')
     def beer(self, **kw):
-        colModel = [
-            {'display':'Name', 'name':'name', 'width':180, 'align':'center'},
-            {'display':'Category', 'name':'category', 'width':60, 'align':'left'},
-            {'display':'Style', 'name':'style', 'width':140, 'align':'left'},
-            {'display':'ABV', 'name':'about', 'width':40, 'align':'center'},
-            {'display':'Color', 'name':'color', 'width':120, 'align':'center'},
-            {'display':'Brewer', 'name':'brewer', 'width':120, 'align':'center'},
-            {'display':'Region', 'name':'region', 'width':120, 'align':'center'}
-        ]
-        searchitems = [
-            {'display':'ID', 'name':'id', 'isdefault':True},
-            {'display':'Category', 'name':'category'},
-            {'display':'Style', 'name':'style'}
-        ]
-        grid = FlexiGrid(id='flex', fetchURL='fetchB', title='Beer',
-            colModel=colModel, useRp=True, rp=10,
-            sortname='id', sortorder='asc', usepager=True,
-            searchitems=searchitems,
-            showTableToggleButton=True,
-       #    buttons=buttons,
-            width=881,
-            height=200
-        )
-        pylons.tmpl_context.grid = grid
+        beer_grid = DataGrid(fields=[('Name','Drink.name'), ('Category', 'Beer.category'), ('Style', 'Beer.style'), ('ABV', 'Drink.abv'), ('Color', 'Beer.color'), ('Brewer', 'Manufacturer.name'), ('Region', 'Region.state')])
         tmpl_context.form = create_beer_form
-        #beers = DBSession.query( Beer ).order_by( Beer.id )
-        return dict(page = 'beer', modelname='Beer', value=kw, )
-
-    
-    @expose('ldb.templates.liquor')
-    def liquor(self):
-        colModel = [
-            {'display':'Name', 'name':'name', 'width':180, 'align':'center'},
-            {'display':'Category', 'name':'category', 'width':60, 'align':'left'},
-            {'display':'Style', 'name':'style', 'width':140, 'align':'left'},
-            {'display':'ABV', 'name':'about', 'width':40, 'align':'center'},
-            {'display':'Color', 'name':'color', 'width':120, 'align':'center'},
-            {'display':'Brewer', 'name':'brewer', 'width':120, 'align':'center'},
-            {'display':'Region', 'name':'region', 'width':120, 'align':'center'}
-        ]
-        searchitems = [
-            {'display':'ID', 'name':'id', 'isdefault':True},
-            {'display':'Category', 'name':'category'},
-            {'display':'Style', 'name':'style'}
-        ]
-        grid = FlexiGrid(id='flex', fetchURL='fetchL', title='Liquor',
-            colModel=colModel, useRp=True, rp=10,
-            sortname='id', sortorder='asc', usepager=True,
-            searchitems=searchitems,
-            showTableToggleButton=True,
-       #    buttons=buttons,
-            width=881,
-            height=200
-        )
-        pylons.tmpl_context.grid = grid
-        liquors = DBSession.query( Liquor ).order_by( Liquor.id )
-        return dict(page = 'liquor',
-                    liquors = liquors, )
-    @expose('json')
-    #@validate(validators={"page":validators.Int(), "rp":validators.Int()})
-    def fetchB(self, page=1, rp=25, sortname='id', sortorder='asc', qtype=None, query=None): 
-        try: 
-            offset = (int(page)-1) * int(rp) 
-        except: 
-            page = 1 
-            rp=25 
-            offset = (int(page)-1) * int(rp)
-        if (query):
-            #d = {qtype:query}
-            beers = DBSession.query(Beer, Drink, Manufacturer, Region).filter(Beer.id == Drink.catB_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)
-        else:
-            beers = DBSession.query(Beer, Drink, Manufacturer, Region).filter(Beer.id == Drink.catB_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)
-        total = beers.count()
-        #column = getattr(Beer, sortname)
-        #beers = beers.order_by(getattr(column,sortorder)()).offset(offset).limit(rp)
-        rows = [{'id'  : beer.Beer.id, 'cell': [beer.Drink.name, beer.Beer.category, beer.Beer.style, beer.Drink.abv, beer.Beer.color, beer.Manufacturer.name, beer.Region.state]} for beer in beers]
-        return dict(page=page, total=total, rows=rows)
-
-    @expose('json')
-    #@validate(validators={"page":validators.Int(), "rp":validators.Int()})
-    def fetchW(self, page=1, rp=25, sortname='id', sortorder='asc', qtype=None, query=None): 
-        try: 
-            offset = (int(page)-1) * int(rp) 
-        except: 
-            page = 1 
-            rp=25 
-            offset = (int(page)-1) * int(rp)
-        if (query):
-            #d = {qtype:query}
-            wines = DBSession.query(Wine, Drink, Manufacturer, Region).filter(Wine.id == Drink.catW_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)
-        else:
-            wines = DBSession.query(Wine, Drink, Manufacturer, Region).filter(Wine.id == Drink.catW_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)
-
-        total = wines.count()
-        rows = [{'id'  : wine.Wine.id,
-                 'cell': [wine.Drink.name, wine.Wine.category, wine.Wine.style, wine.Drink.abv, wine.Wine.color, wine.Manufacturer.name, wine.Region.state]} for wine in wines]
-        return dict(page=page, total=total, rows=rows)
-
-
-    @expose('json')
-    #@validate(validators={"page":validators.Int(), "rp":validators.Int()})
-    def fetchL(self, page=1, rp=25, sortname='id', sortorder='asc', qtype=None, query=None): 
-        try: 
-            offset = (int(page)-1) * int(rp) 
-        except: 
-            page = 1 
-            rp=25 
-            offset = (int(page)-1) * int(rp)
-        if (query):
-            #d = {qtype:query}
-            liquors = DBSession.query(Liquor, Drink, Manufacturer, Region).filter(Liquor.id == Drink.catL_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)
-        else:
-            liquors = DBSession.query(Liquor, Drink, Manufacturer, Region).filter(Liquor.id == Drink.catL_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)
-        total = liquors.count()
-        column = getattr(Liquor, sortname)
-        #beers = beers.order_by(getattr(column,sortorder)()).offset(offset).limit(rp)
-        rows = [{'id'  : liquor.Liquor.id,
-                 'cell': [liquor.Drink.name, liquor.Liquor.category, liquor.Liquor.style, liquor.Drink.abv, liquor.Liquor.color, liquor.Manufacturer.name, liquor.Region.state]} for liquor in liquors]
-        return dict(page=page, total=total, rows=rows)
-
-    @expose('ldb.templates.beer_form')
-    def beerF(self, **kw):
-        """Show form to add new movie data record."""
-        tmpl_context.form = create_beer_form
-        return dict(modelname='Beer', value=kw)
+        
+        bUrl = 'query(Beer, Drink, Manufacturer, Region).filter(Beer.id == Drink.catB_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)'
+        if kw:
+            name = kw['name']
+            if name:
+                bUrl = bUrl + '.filter(Drink.name == \''+ name + '\')'
+            category = kw['category']
+            if category:
+                bUrl = bUrl + '.filter(Beer.category == \''+ category + '\')'        
+            style = kw['style']
+            if style:
+                bUrl = bUrl + '.filter(Beer.style == \''+ style + '\')'        
+            abv = kw['abv']
+            if abv:
+                bUrl = bUrl + '.filter(Drink.abv == \''+ abv + '\')' #may need to be converted to a double!!!
+            color = kw['color']
+            if color:
+                bUrl = bUrl + '.filter(Beer.color == \''+ color + '\')'
+            brewer = kw['brewer']
+            if brewer:
+                bUrl = bUrl + '.filter(Manufacturer.name == \''+ brewer + '\')'    
+            region = kw['region']
+            if region:
+                bUrl = bUrl + '.filter(Region.state == \''+ region + '\')'
+        #beers = getattr(DBSession, bUrl)()
+        beers = eval('DBSession.' + bUrl)
+        return dict(page = 'beer', grid = beer_grid, beers = beers, modelname = 'Beer', value = kw )
 
     @expose()
     def beerQ(self, **kw):
         """Query from the form on the beer page"""
         #set up parameters
-        beer = Beer()
-        beer.color = kw['color']
-        beer.id = kw['id']
-        beer.style = kw['style']
-        beer.category = kw['category']
-
+        name = kw['name']
+        category = kw['category']
+        style = kw['style']
+        abv = kw['abv']
+        color = kw['color']
+        brewer = kw['brewer']
+        region = kw['region']
+        redirect('./beer?name='+name+'&category='+category+'&style='+style+'&abv='+abv+'&color='+color+'&brewer='+brewer+'&region='+region)
         #query the DB session
+        #how does the query show up in the table?
         #DBSession.query( Beer )
+
+
+    @expose()
+    def liquorQ(self, **kw):
+        """Query from the form on the liquor page"""
+        #set up parameters
+        name = kw['name']
+        category = kw['category']
+        style = kw['style']
+        abv = kw['abv']
+        color = kw['color']
+        brewer = kw['brewer']
+        region = kw['region']
+        redirect('./liquor?name='+name+'&category='+category+'&style='+style+'&abv='+abv+'&color='+color+'&brewer='+brewer+'&region='+region)
+
+        
+    @expose()
+    def wineQ(self, **kw):
+        """Query from the form on the wine page"""
+        #set up parameters
+        name = kw['name']
+        category = kw['category']
+        style = kw['style']
+        abv = kw['abv']
+        color = kw['color']
+        brewer = kw['brewer']
+        region = kw['region']
+        redirect('./wine?name='+name+'&category='+category+'&style='+style+'&abv='+abv+'&color='+color+'&brewer='+brewer+'&region='+region)
+        
+    @expose('ldb.templates.liquor')
+    def liquor(self, **kw):
+        liquor_grid = DataGrid(fields=[('Name','Drink.name'), ('Category', 'Liquor.category'), ('Style', 'Liquor.style'), ('ABV', 'Drink.abv'), ('Color', 'Liquor.color'), ('Brewer', 'Manufacturer.name'), ('Region', 'Region.state')])
+        tmpl_context.form = create_liquor_form
+        
+        bUrl = 'query(Liquor, Drink, Manufacturer, Region).filter(Liquor.id == Drink.catL_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)'
+        if kw:
+            name = kw['name']
+            if name:
+                bUrl = bUrl + '.filter(Drink.name == \''+ name + '\')'
+            category = kw['category']
+            if category:
+                bUrl = bUrl + '.filter(Liquor.category == \''+ category + '\')'        
+            style = kw['style']
+            if style:
+                bUrl = bUrl + '.filter(Liquor.style == \''+ style + '\')'        
+            abv = kw['abv']
+            if abv:
+                bUrl = bUrl + '.filter(Drink.abv == \''+ abv + '\')' #may need to be converted to a double!!!
+            color = kw['color']
+            if color:
+                bUrl = bUrl + '.filter(Liquor.color == \''+ color + '\')'
+            brewer = kw['brewer']
+            if brewer:
+                bUrl = bUrl + '.filter(Manufacturer.name == \''+ brewer + '\')'    
+            region = kw['region']
+            if region:
+                bUrl = bUrl + '.filter(Region.state == \''+ region + '\')'
+        liquors = eval('DBSession.' + bUrl)
+        return dict(page = 'liquor', grid = liquor_grid, liquors = liquors, modelname = 'Liquor', value = kw )
