@@ -14,7 +14,7 @@ from ldb.controllers.error import ErrorController
 from ldb import model
 from ldb.controllers.secure import SecureController
 from tw.jquery import FlexiGrid
-from tw.api import js_callback
+from tw.api import js_callback, Resource
 
 from tg import tmpl_context
 from ldb.widgets.beer_form import create_beer_form
@@ -60,8 +60,15 @@ class RootController(BaseController):
         """Handle the contact page"""
         return dict(page='contact')
 
+    @expose('ldb.templates.region')
+    def region(self):
+        """Handle the front-page."""
+        return dict(page='region')
 
-   
+    @expose('ldb.templates.map_iframe')
+    def map_iframe(self):
+        """Handle the front-page."""
+        return dict(page='map_iframe')
 
     #@expose('ldb.templates.page')
     #def page(self):
