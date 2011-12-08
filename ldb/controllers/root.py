@@ -58,6 +58,9 @@ class RootController(BaseController):
         """Handle the contact page"""
         return dict(page='contact')
 
+
+   
+
     #@expose('ldb.templates.page')
     #def page(self):
     #   page = DBSession.query(Beer).order_by("id").all()
