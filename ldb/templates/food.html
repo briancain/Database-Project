@@ -8,12 +8,33 @@
 
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
-  <title>Food</title>
+  <title>food.</title>
+  <script type="text/javascript" src="javascript/jquery-1.5.1.min.js"></script>
+  <script type="text/javascript" src="javascript/jquery-ui-1.8.10.custom.min_.js"></script>
+  <script type="text/javascript" src="javascript/accordionImageMenu-0.4.min_.js"></script>
+  <link rel="stylesheet" href="css/accordionImageMenu.css" type="text/css" />
+  <script type="text/javascript">
+  $(document).ready(function() {
+	$('#menu').AccordionImageMenu({
+	  'openDim': 320,
+	  'closeDim': 180,
+          'height':300,
+	});
+  });
+  </script>
+
+
 </head>
 
 <body>
-  <div id="derp">
-      ${tmpl_context.grid()}
-  </div>
+  <ul id='menu'>
+     <li><a href='wine'><span>Chicken</span><img src="images/chick.jpg" /></a></li>
+     <li><a href='beer'><span>Seafood</span><img src="images/seafood.jpg" /></a></li>
+     <li><a href='liquor'><span>Pasta</span><img src="images/pasta.jpg" /></a></li>
+     <li><a href='food'><span>Beef</span><img src="images/steak.bmp" /></a></li>
+     <li><a href='region'><span>Spicy</span><img src="images/spicy.jpg" /></a></li>
+  </ul>
 </body>
 </html>
+
+  

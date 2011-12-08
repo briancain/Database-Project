@@ -13,7 +13,9 @@
 
 <body>
   <div id="derp">
-      ${tmpl_context.grid()}
+      <h1>Query ${modelname}s</h1>
+      <div py:replace="tmpl_context.form(value)">Input Form</div>
+      ${grid(liquors)}
   </div>
 </body>
 </html>

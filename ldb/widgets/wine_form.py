@@ -1,10 +1,10 @@
-"""Beer Form"""
+"""Wine Form"""
 
 from tw.api import WidgetsList
 from tw.forms import TableForm, CalendarDatePicker, SingleSelectField, TextField, TextArea
 
 
-class BeerForm(TableForm):
+class WineForm(TableForm):
 
     class fields(WidgetsList):
         name = TextField()
@@ -16,4 +16,4 @@ class BeerForm(TableForm):
         region = TextField()
 
 
-create_beer_form = BeerForm("create_beer_form", action='beerQ')
+create_wine_form = WineForm("create_wine_form", action='wineQ')
