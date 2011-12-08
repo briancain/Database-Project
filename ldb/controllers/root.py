@@ -215,6 +215,15 @@ class RootController(BaseController):
 
         if kw:
             name = kw['name']
+            if name == '0':
+              name = 'Pasta With White Sauce'
+            elif name == '1':
+              name = 'Pasta With Red Sauce'
+            elif name == '2':
+              name = 'Red Meat'
+            elif name == '3':
+              name = 'Poultry'
+
             if name:
                 fUrl = fUrl + '.filter(Food.name == \''+ name + '\')'
                 fbUrl = fbUrl + '.filter(Food.name == \''+ name + '\')'
