@@ -144,63 +144,116 @@ class RootController(BaseController):
         wine_grid = DataGrid(fields=[('Name','Drink.name'), ('Category', 'Wine.category'), ('Style', 'Wine.style'), ('ABV', 'Drink.abv'), ('Color', 'Wine.color'), ('Brewer', 'Manufacturer.name'), ('Region', 'Region.state')])
         tmpl_context.form = create_wine_form
         
-        bUrl = 'query(Wine, Drink, Manufacturer, Region).filter(Wine.id == Drink.catW_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)'
+        wineQueryString = 'query(Wine, Drink, Manufacturer, Region).filter(Wine.id == Drink.catW_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)'
         if kw:
             name = kw['name']
             if name:
-                bUrl = bUrl + '.filter(Drink.name == \''+ name + '\')'
+                wineQueryString = wineQueryString + '.filter(Drink.name == \''+ name + '\')'
             category = kw['category']
             if category:
-                bUrl = bUrl + '.filter(Wine.category == \''+ category + '\')'        
+                wineQueryString = wineQueryString + '.filter(Wine.category == \''+ category + '\')'        
             style = kw['style']
             if style:
-                bUrl = bUrl + '.filter(Wine.style == \''+ style + '\')'        
+                wineQueryString = wineQueryString + '.filter(Wine.style == \''+ style + '\')'        
             abv = kw['abv']
             if abv:
-                bUrl = bUrl + '.filter(Drink.abv == \''+ abv + '\')' #may need to be converted to a double!!!
+                wineQueryString = wineQueryString + '.filter(Drink.abv == \''+ abv + '\')' #may need to be converted to a double!!!
             color = kw['color']
             if color:
-                bUrl = bUrl + '.filter(Wine.color == \''+ color + '\')'
+                wineQueryString = wineQueryString + '.filter(Wine.color == \''+ color + '\')'
             brewer = kw['brewer']
             if brewer:
-                bUrl = bUrl + '.filter(Manufacturer.name == \''+ brewer + '\')'    
+                wineQueryString = wineQueryString + '.filter(Manufacturer.name == \''+ brewer + '\')'    
             region = kw['region']
             if region:
-                bUrl = bUrl + '.filter(Region.state == \''+ region + '\')'
-        wines = eval('DBSession.' + bUrl)
+                wineQueryString = wineQueryString + '.filter(Region.state == \''+ region + '\')'
+        wines = eval('DBSession.' + wineQueryString)
         return dict(page = 'wine', grid = wine_grid, wines = wines, modelname = 'Wine', value = kw )
     
     @expose('ldb.templates.beer')
     def beer(self, **kw):
-        beer_grid = DataGrid(fields=[('Name','Drink.name'), ('Category', 'Beer.category'), ('Style', 'Beer.style'), ('ABV', 'Drink.abv'), ('Color', 'Beer.color'), ('Brewer', 'Manufacturer.name'), ('Region', 'Region.state')])
-        tmpl_context.form = create_beer_form
+        """Controller method for the beer page"""
         
-        bUrl = 'query(Beer, Drink, Manufacturer, Region).filter(Beer.id == Drink.catB_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)'
+        tmpl_context.form = create_beer_form #creates the search form for beers, see widgets/beer_form.py
+        # beer_grid is the table which displays all of our data.
+        beer_grid = DataGrid(fields=[('Name','Drink.name'),
+                                     ('Category', 'Beer.category'),
+                                     ('Style', 'Beer.style'),
+                                     ('ABV', 'Drink.abv'),
+                                     ('Color', 'Beer.color'),
+                                     ('Brewer', 'Manufacturer.name'),
+                                     ('Region', 'Region.state')])
+
+        """ Search Queries for beer, wine, and liquor work in the following way:
+        
+               1. The user inputs data into the beer_form displayed on the beer page
+               2. When the "submit" button is pressed on the beer_form,
+                  RootController.beerQ(see below) is called with the search parameters entered by the user.
+               3. beerQ parses out the search parameters, and reloads the beer page with the parameters appended to the URL,
+                  the beer method(this one) then builds a database query from these parameters.
+               4. The query is executed, and the results are displayed within the beer_grid table.
+        """
+        
+        beerQueryString = 'query(Beer, Drink, Manufacturer, Region)'
+                         + '.filter(Beer.id == Drink.catB_id)'
+                         + '.filter(Drink.manu_id == Manufacturer.id)'
+                         + '.filter(Manufacturer.reg_id == Region.id)'
         if kw:
             name = kw['name']
             if name:
-                bUrl = bUrl + '.filter(Drink.name == \''+ name + '\')'
+                beerQueryString = beerQueryString + '.filter(Drink.name == \''+ name + '\')'
             category = kw['category']
             if category:
-                bUrl = bUrl + '.filter(Beer.category == \''+ category + '\')'        
+                beerQueryString = beerQueryString + '.filter(Beer.category == \''+ category + '\')'        
             style = kw['style']
             if style:
-                bUrl = bUrl + '.filter(Beer.style == \''+ style + '\')'        
+                beerQueryString = beerQueryString + '.filter(Beer.style == \''+ style + '\')'        
             abv = kw['abv']
             if abv:
-                bUrl = bUrl + '.filter(Drink.abv == \''+ abv + '\')' #may need to be converted to a double!!!
+                beerQueryString = beerQueryString + '.filter(Drink.abv == \''+ abv + '\')' #may need to be converted to a double!!!
             color = kw['color']
             if color:
-                bUrl = bUrl + '.filter(Beer.color == \''+ color + '\')'
+                beerQueryString = beerQueryString + '.filter(Beer.color == \''+ color + '\')'
             brewer = kw['brewer']
             if brewer:
-                bUrl = bUrl + '.filter(Manufacturer.name == \''+ brewer + '\')'    
+                beerQueryString = beerQueryString + '.filter(Manufacturer.name == \''+ brewer + '\')'    
             region = kw['region']
             if region:
-                bUrl = bUrl + '.filter(Region.state == \''+ region + '\')'
-        #beers = getattr(DBSession, bUrl)()
-        beers = eval('DBSession.' + bUrl)
+                beerQueryString = beerQueryString + '.filter(Region.state == \''+ region + '\')'
+        beers = eval('DBSession.' + beerQueryString)
         return dict(page = 'beer', grid = beer_grid, beers = beers, modelname = 'Beer', value = kw )
+
+      
+    @expose('ldb.templates.liquor')
+    def liquor(self, **kw):
+        liquor_grid = DataGrid(fields=[('Name','Drink.name'), ('Category', 'Liquor.category'), ('Style', 'Liquor.style'), ('ABV', 'Drink.abv'), ('Color', 'Liquor.color'), ('Brewer', 'Manufacturer.name'), ('Region', 'Region.state')])
+        tmpl_context.form = create_liquor_form
+        
+        liquorQueryString = 'query(Liquor, Drink, Manufacturer, Region).filter(Liquor.id == Drink.catL_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)'
+        if kw:
+            name = kw['name']
+            if name:
+                liquorQueryString = liquorQueryString + '.filter(Drink.name == \''+ name + '\')'
+            category = kw['category']
+            if category:
+                liquorQueryString = liquorQueryString + '.filter(Liquor.category == \''+ category + '\')'        
+            style = kw['style']
+            if style:
+                liquorQueryString = liquorQueryString + '.filter(Liquor.style == \''+ style + '\')'        
+            abv = kw['abv']
+            if abv:
+                liquorQueryString = liquorQueryString + '.filter(Drink.abv == \''+ abv + '\')' #may need to be converted to a double!!!
+            color = kw['color']
+            if color:
+                liquorQueryString = liquorQueryString + '.filter(Liquor.color == \''+ color + '\')'
+            brewer = kw['brewer']
+            if brewer:
+                liquorQueryString = liquorQueryString + '.filter(Manufacturer.name == \''+ brewer + '\')'    
+            region = kw['region']
+            if region:
+                liquorQueryString = liquorQueryString + '.filter(Region.state == \''+ region + '\')'
+        liquors = eval('DBSession.' + liquorQueryString)
+        return dict(page = 'liquor', grid = liquor_grid, liquors = liquors, modelname = 'Liquor', value = kw )
 
 
     @expose('ldb.templates.food')
@@ -210,8 +263,8 @@ class RootController(BaseController):
         food_beer_grid = DataGrid(fields=[('Beer Name','Drink.name'), ('Category', 'Beer.category'), ('Style', 'Beer.style'), ('ABV', 'Drink.abv'), ('Food Name', 'Food.name')])
         tmpl_context.form = create_food_form
         
-        fUrl = 'query(Food, Drink, Wine).filter(Wine.id == Drink.catW_id).filter(Food.catW_id == Drink.catW_id)'
-        fbUrl = 'query(Food, Drink, Beer).filter(Beer.id == Drink.catB_id).filter(Food.catB_id == Drink.catB_id)'
+        wineQueryString = 'query(Food, Drink, Wine).filter(Wine.id == Drink.catW_id).filter(Food.catW_id == Drink.catW_id)'
+        beerQueryString = 'query(Food, Drink, Beer).filter(Beer.id == Drink.catB_id).filter(Food.catB_id == Drink.catB_id)'
 
         if kw:
             name = kw['name']
@@ -225,12 +278,11 @@ class RootController(BaseController):
               name = 'Poultry'
 
             if name:
-                fUrl = fUrl + '.filter(Food.name == \''+ name + '\')'
-                fbUrl = fbUrl + '.filter(Food.name == \''+ name + '\')'
+                wineQueryString = wineQueryString + '.filter(Food.name == \''+ name + '\')'
+                beerQueryString = beerQueryString + '.filter(Food.name == \''+ name + '\')'
 
-        #beers = getattr(DBSession, bUrl)()
-        wines = eval('DBSession.' + fUrl)
-        beers = eval('DBSession.' + fbUrl)
+        wines = eval('DBSession.' + wineQueryString)
+        beers = eval('DBSession.' + beerQueryString)
         return dict(page = 'food', grid = food_wine_grid, gridbeer = food_beer_grid, wines = wines, beers = beers, modelname = 'Food', value = kw )
 
     @expose()
@@ -251,10 +303,6 @@ class RootController(BaseController):
         brewer = kw['brewer']
         region = kw['region']
         redirect('./beer?name='+name+'&category='+category+'&style='+style+'&abv='+abv+'&color='+color+'&brewer='+brewer+'&region='+region)
-        #query the DB session
-        #how does the query show up in the table?
-        #DBSession.query( Beer )
-
 
     @expose()
     def liquorQ(self, **kw):
@@ -282,34 +330,4 @@ class RootController(BaseController):
         brewer = kw['brewer']
         region = kw['region']
         redirect('./wine?name='+name+'&category='+category+'&style='+style+'&abv='+abv+'&color='+color+'&brewer='+brewer+'&region='+region)
-        
-    @expose('ldb.templates.liquor')
-    def liquor(self, **kw):
-        liquor_grid = DataGrid(fields=[('Name','Drink.name'), ('Category', 'Liquor.category'), ('Style', 'Liquor.style'), ('ABV', 'Drink.abv'), ('Color', 'Liquor.color'), ('Brewer', 'Manufacturer.name'), ('Region', 'Region.state')])
-        tmpl_context.form = create_liquor_form
-        
-        bUrl = 'query(Liquor, Drink, Manufacturer, Region).filter(Liquor.id == Drink.catL_id).filter(Drink.manu_id == Manufacturer.id).filter(Manufacturer.reg_id == Region.id)'
-        if kw:
-            name = kw['name']
-            if name:
-                bUrl = bUrl + '.filter(Drink.name == \''+ name + '\')'
-            category = kw['category']
-            if category:
-                bUrl = bUrl + '.filter(Liquor.category == \''+ category + '\')'        
-            style = kw['style']
-            if style:
-                bUrl = bUrl + '.filter(Liquor.style == \''+ style + '\')'        
-            abv = kw['abv']
-            if abv:
-                bUrl = bUrl + '.filter(Drink.abv == \''+ abv + '\')' #may need to be converted to a double!!!
-            color = kw['color']
-            if color:
-                bUrl = bUrl + '.filter(Liquor.color == \''+ color + '\')'
-            brewer = kw['brewer']
-            if brewer:
-                bUrl = bUrl + '.filter(Manufacturer.name == \''+ brewer + '\')'    
-            region = kw['region']
-            if region:
-                bUrl = bUrl + '.filter(Region.state == \''+ region + '\')'
-        liquors = eval('DBSession.' + bUrl)
-        return dict(page = 'liquor', grid = liquor_grid, liquors = liquors, modelname = 'Liquor', value = kw )
+  
